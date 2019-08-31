@@ -60,4 +60,5 @@ These are the options recommended to be changed. For more detailed explanation o
 
 ## Release History
 
+- v0.0.1 - Update icon and color for GitHub actions
 - v0.0.0 - Initial release

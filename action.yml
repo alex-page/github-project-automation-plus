@@ -15,5 +15,5 @@ runs:
   using: 'node12'
   main: 'dist/index.js'
 branding:
-  icon: 'plus'
-  color: 'yellow'
+  icon: 'cpu'
+  color: 'gray-dark'
