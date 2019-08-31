@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: Move new issues into Triage
         if: github.event_name == 'issues' && github.event.action == 'opened'
-        uses: alex-page/automate-project-columns@master
+        uses: alex-page/github-project-automation-plus@master
         with:
           project: Backlog
           column: Triage
@@ -37,7 +37,7 @@ jobs:
 
       - name: Move assinged pull requests into To do
         if: github.event_name == 'pull_request' && github.event.action == 'assigned'
-        uses: alex-page/automate-project-columns@master
+        uses: alex-page/github-project-automation-plus@master
         with:
           project: Backlog
           column: To do
