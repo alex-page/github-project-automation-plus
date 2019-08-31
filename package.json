@@ -1,0 +1,38 @@
+{
+  "name": "github-project-automation-plus",
+  "version": "0.0.1",
+  "description": "🤖 Automate GitHub Project cards with any webhook event",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "watch": "ncc build index.js --watch --minify",
+    "build": "ncc build index.js --minify",
+    "test": "xo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex-page/automate-project-columns.git"
+  },
+  "keywords": [
+    "github-actions",
+    "github-projects",
+    "issues",
+    "pulls",
+    "automation",
+    "columns"
+  ],
+  "author": "Alex Page <alex@alexpage.com.au>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alex-page/automate-project-columns/issues"
+  },
+  "homepage": "https://github.com/alex-page/automate-project-columns#readme",
+  "dependencies": {
+    "@actions/core": "^1.0.0",
+    "@actions/github": "^1.0.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.20.4",
+    "xo": "^0.24.0"
+  }
+}
