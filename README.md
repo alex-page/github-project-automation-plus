@@ -56,6 +56,28 @@ These are the options recommended to be changed. For more detailed explanation o
 | `github.event.action` | The [webhook event](https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events) that triggers the automation | `opened`, `assigned`, [...more](https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events) |
 | `project` | The name of the project | `Backlog` |
 | `column` | The column to create or move the card to | `Triage` |
+| `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
+
+
+## Private repositories
+
+In some cases you may want to do add this functionality for a private repository or one you do not have admin rights to. You may get an error like:
+```shell
+GraphqlError: Resource not accessible by integration
+```
+
+When this happens you will need to:
+1. Create a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
+2. [Create a secret](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables) containing the personal access token, call it `GH_PAT`
+3. Change the `repo-token` to reference your new token name:
+```yaml
+repo-token: ${{ secrets.GH_PAT }}
+```
+
+With certain organisations there may be SAML enforcement. This means you will need to `Enable SSO` when you create the personal access token.
+```
+GraphqlError: Resource protected by organization SAML enforcement. You must grant your personal token access to this organization
+```
 
 
 ## Release History
