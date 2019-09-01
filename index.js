@@ -114,6 +114,7 @@ const getData = () => {
 
 		console.log(`✅ ${action === 'opened' ? 'Added' : 'Moved'} card to ${column} in ${project}`);
 	} catch (error) {
-		console.error(error);
+		core.error(error);
+		core.setFailed(error.message);
 	}
 })();
