@@ -70,11 +70,7 @@ const getData = () => {
 			}
 		}`;
 
-		core.debug('Before 1st query');
-
 		const {resource} = await octokit.graphql(fetchColumnQuery);
-
-		core.debug('After 1st query');
 
 		// All the matching projects found
 		const repoProjects = resource.repository.projects.nodes || [];
@@ -118,7 +114,6 @@ const getData = () => {
 
 		console.log(`✅ ${action === 'opened' ? 'Added' : 'Moved'} card to ${column} in ${project}`);
 	} catch (error) {
-		console.log('failed here actually');
 		core.error(error);
 		core.setFailed(error.message);
 	}
