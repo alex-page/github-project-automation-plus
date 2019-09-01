@@ -82,6 +82,7 @@ GraphqlError: Resource protected by organization SAML enforcement. You must gran
 
 ## Release History
 
+- v0.0.3 - Automatic build before commit
 - v0.0.2 - Error handling using GitHub actions
 - v0.0.1 - Update icon and color for GitHub actions
 - v0.0.0 - Initial release
