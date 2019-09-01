@@ -102,14 +102,14 @@ const getData = () => {
 				columns.map(column => octokit.graphql(`mutation {
 					moveProjectCard( input: { cardId: "${cardId}", columnId: "${column.id}"
 				}) { clientMutationId } }`))
-			);
+			).catch(error => new Error(error));
 		// If the card does not exist, add it to the column
 		} else {
 			await Promise.all(
 				columns.map(column => octokit.graphql(`mutation {
 					addProjectCard( input: { contentId: "${nodeId}", projectColumnId: "${column.id}"
 				}) { clientMutationId } }`))
-			);
+			).catch(error => new Error(error));
 		}
 
 		console.log(`✅ ${action === 'opened' ? 'Added' : 'Moved'} card to ${column} in ${project}`);
