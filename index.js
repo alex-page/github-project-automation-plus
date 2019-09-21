@@ -51,7 +51,7 @@ const getData = () => {
 							}
 						}
 						owner {
-							... on Organization {
+							... on ProjectOwner {
 								projects( search: "${project}", first: 10, states: [OPEN] ) {
 									nodes {
 										id
