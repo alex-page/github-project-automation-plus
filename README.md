@@ -2,7 +2,7 @@
 
 > 🤖 Automate GitHub Project cards with any webhook event
 
-This action allows you to use any of the `pull_request` and `issue` [webhook events](https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events) to automate your project cards. For example when an `issue` is `opened` create a card in the Backlog project, Triage column.
+This action allows you to use any of the [pull_request](https://help.github.com/en/articles/events-that-trigger-workflows#pull-request-event-pull_request) and [issue](https://help.github.com/en/articles/events-that-trigger-workflows#issues-event-issues) webhook events to automate your project cards. For example when an `issue` is `opened` create a card in the Backlog project, Triage column.
 
 If the `pull_request` or `issue` has a card it will be moved to the column provided. Otherwise the card will be created in the column.
 
