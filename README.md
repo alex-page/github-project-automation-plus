@@ -14,7 +14,7 @@ If the `pull_request` or `issue` has a card it will be moved to the column provi
 3. In the `.yml`file you have to decide what webhook events going move or create a card in a column.
 
 
-### `.github/workflows/opened-issues-triage.yml`
+### .github/workflows/opened-issues-triage.yml
 
 Move opened issues into the Triage column of the Backlog project
 
@@ -36,7 +36,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-### `.github/workflows/assigned-pulls-todo.yml`
+### .github/workflows/assigned-pulls-todo.yml
 
 Add assigned pull requests into the To Do column of the Backlog project
 
