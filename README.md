@@ -11,7 +11,7 @@ If the `pull_request` or `issue` has a card it will be moved to the column provi
 
 Create a [project](https://help.github.com/en/articles/about-project-boards) with Columns set up in your repository, user profile or organisation.
 
-Create a new workflow `.yml` file in the `.github/workflows/` directory. In the `.yml`file you have to decide what webhook events going move or create a card in a column. See the examples below.
+Create a new workflow `.yml` file in the `.github/workflows/` directory. In the `.yml`file you have to decide what webhook events going move or create a card in a column. For more detailed explanation of the workflow file, check out the [GitHub documentation](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file). See the examples below to get started quickly.
 
 
 ### .github/workflows/opened-issues-triage.yml
@@ -60,7 +60,7 @@ jobs:
 
 ## Workflow options
 
-These are the options recommended to be changed. For more detailed explanation of the workflow file, check out the [GitHub documentation](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
+Change these options in the workflow `.yml` file to meet your GitHub project needs.
 
 | Setting | Description | Values |
 | --- | --- | --- |
