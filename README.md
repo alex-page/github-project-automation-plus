@@ -9,41 +9,54 @@ If the `pull_request` or `issue` has a card it will be moved to the column provi
 
 ## Usage
 
-1. Create a new workflow by adding `.github/workflows/backlog-automation.yml` to your project. 
+1. Create a new workflow `.yml` file to `.github/workflows/`
 2. Create a [project](https://help.github.com/en/articles/about-project-boards) with Columns set up in your repository or organisation.
-3. In the `backlog-automation.yml` you have to decide what events and actions are going move an issue or pull request to a column.
+3. In the `.yml`file you have to decide what webhook events going move or create a card in a column.
 
 
-_For example:_
+### `.github/workflows/opened-issues-triage.yml`
 
-To move opened issues into the Triage column and assigned pull requests into the To Do column of the Backlog project. You would add the following to the `backlog-automation.yml` file:
+Move opened issues into the Triage column of the Backlog project
 
 ```yml
-name: Automate project columns
+name: Move new issues into Triage
 
-on: [issues, pull_request]
+on:
+  issues:
+    types: [opened]
 
 jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - name: Move new issues into Triage
-        if: github.event_name == 'issues' && github.event.action == 'opened'
-        uses: alex-page/github-project-automation-plus@v0.1.0
+      - uses: alex-page/github-project-automation-plus@v0.1.0
         with:
           project: Backlog
           column: Triage
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+```
 
-      - name: Move assinged pull requests into To do
-        if: github.event_name == 'pull_request' && github.event.action == 'assigned'
-        uses: alex-page/github-project-automation-plus@v0.1.0
+### `.github/workflows/assigned-pulls-todo.yml`
+
+Add assigned pull requests into the To Do column of the Backlog project
+
+```yml
+name: Move assinged pull requests into To do
+
+on:
+  pull_request:
+    types: [assigned]
+
+jobs:
+  automate-project-columns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.1.0
         with:
           project: Backlog
           column: To do
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 ```
-
 
 ## Workflow options
 
@@ -51,9 +64,8 @@ These are the options recommended to be changed. For more detailed explanation o
 
 | Setting | Description | Values |
 | --- | --- | --- |
-| `on` | When the automation is ran | `[issues, pull_request]` |
-| `github.event.name` | The event type | `issues` or `pull_request` |
-| `github.event.action` | The [webhook event](https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events) that triggers the automation | `opened`, `assigned`, [...more](https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events) |
+| `on` | When the automation is ran | `issues` `pull_request` |
+| `types` | The types of activity that will trigger a workflow run. | `created`, `assigned` |
 | `project` | The name of the project | `Backlog` |
 | `column` | The column to create or move the card to | `Triage` |
 | `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
@@ -82,6 +94,7 @@ GraphqlError: Resource protected by organization SAML enforcement. You must gran
 
 ## Release History
 
+- v0.1.1 - Document type filter so action runs once
 - v0.1.0 - Add support for user projects
 - v0.0.3 - Automatic build before commit
 - v0.0.2 - Error handling using GitHub actions
