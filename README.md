@@ -81,7 +81,7 @@ GraphqlError: Resource not accessible by integration
 When this happens you will need to:
 1. Create a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
 2. [Create a secret](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables) containing the personal access token, call it `GH_PAT`
-3. Change the `repo-token` in the `backlog-automation.yml`  to reference your new token name:
+3. Change the `repo-token` in the workflow `.yml`  to reference your new token name:
 ```yaml
 repo-token: ${{ secrets.GH_PAT }}
 ```
