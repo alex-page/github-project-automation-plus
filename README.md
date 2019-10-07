@@ -41,7 +41,7 @@ jobs:
 Add assigned pull requests into the To Do column of the Backlog project
 
 ```yml
-name: Move assinged pull requests into To do
+name: Move assigned pull requests into To do
 
 on:
   pull_request:
