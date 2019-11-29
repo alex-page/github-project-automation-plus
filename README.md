@@ -9,7 +9,7 @@ If the `pull_request` or `issue` card already exists it will be moved to the col
 
 ## Usage
 
-Create a [project](https://help.github.com/en/articles/about-project-boards) with Columns set up in your repository, user profile or organisation.
+Create a [project](https://help.github.com/en/articles/about-project-boards) with columns set up in your repository, user profile or organisation.
 
 Create a new workflow `.yml` file in the `.github/workflows/` directory. In the `.yml`file you have to decide what webhook events going move or create a card in a column. For more detailed explanation of the workflow file, check out the [GitHub documentation](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file). See the examples below to get started quickly.
 
