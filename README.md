@@ -94,6 +94,7 @@ GraphqlError: Resource protected by organization SAML enforcement. You must gran
 
 ## Release History
 
+- v0.1.2 - Fix action not running for a card that exists in multiple projects
 - v0.1.1 - Document type filter so action runs once
 - v0.1.0 - Add support for user projects
 - v0.0.3 - Automatic build before commit

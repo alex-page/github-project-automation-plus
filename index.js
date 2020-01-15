@@ -36,6 +36,9 @@ const getData = () => {
 					projectCards {
 						nodes {
 							id
+							project {
+								name
+							}
 						}
 					}
 					repository {
@@ -87,10 +90,9 @@ const getData = () => {
 					[];
 			});
 
-		const cardId = (resource.projectCards.nodes &&
-			resource.projectCards.nodes[0] &&
-			resource.projectCards.nodes[0].id) ||
-			null;
+		const cards = resource.projectCards.nodes ?
+			resource.projectCards.nodes.filter(card => card.project.name === project) : [];
+		const cardId = cards.length > 0 ? cards[0].id : null;
 
 		if (columns.length === 0) {
 			throw new Error(`Could not find ${column} in ${project}`);
