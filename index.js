@@ -98,13 +98,21 @@ const getData = () => {
 			throw new Error(`Could not find ${column} in ${project}`);
 		}
 
-		// If a card already exists, move it to the column
+		// If a card already exists, move it to the column or delete
 		if (cardId) {
-			await Promise.all(
-				columns.map(column => octokit.graphql(`mutation {
-					moveProjectCard( input: { cardId: "${cardId}", columnId: "${column.id}"
-				}) { clientMutationId } }`))
-			);
+			if (action === 'unassigned') {
+				await Promise.all(
+					columns.map(column => octokit.graphql(`mutation {
+						deleteProjectCard( input: { cardId: "${cardId}"
+					}) { clientMutationId } }`))
+				);
+			} else {
+				await Promise.all(
+					columns.map(column => octokit.graphql(`mutation {
+						moveProjectCard( input: { cardId: "${cardId}", columnId: "${column.id}"
+					}) { clientMutationId } }`))
+				);
+			}
 		// If the card does not exist, add it to the column
 		} else {
 			await Promise.all(
