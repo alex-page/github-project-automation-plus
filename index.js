@@ -100,7 +100,7 @@ const getData = () => {
 
 		// If a card already exists, move it to the column or delete
 		if (cardId) {
-			if (action === 'unassigned') {
+			if (action == "unassigned") {
 				await Promise.all(
 					columns.map(column => octokit.graphql(`mutation {
 						deleteProjectCard( input: { cardId: "${cardId}"
