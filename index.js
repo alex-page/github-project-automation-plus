@@ -45,6 +45,7 @@ const getData = () => {
 						projects( search: "${project}", first: 10, states: [OPEN] ) {
 							nodes {
 								id
+								name
 								columns( first: 100 ) {
 									nodes {
 										id
@@ -58,6 +59,7 @@ const getData = () => {
 								projects( search: "${project}", first: 10, states: [OPEN] ) {
 									nodes {
 										id
+										name
 										columns( first: 100 ) {
 											nodes {
 												id
@@ -82,13 +84,15 @@ const getData = () => {
 			resource.repository.owner.projects.nodes) ||
 			[];
 
+		// Search the projects with an exactly matching name
+		const projects = [...repoProjects, ...orgProjects].filter(projectNode => projectNode.name === project);
+
 		// Search the projects for columns with a name that matches
-		const columns = [...repoProjects, ...orgProjects]
-			.flatMap(projects => {
-				return projects.columns.nodes ?
-					projects.columns.nodes.filter(projectColumn => projectColumn.name === column) :
-					[];
-			});
+		const columns = projects.flatMap(projects => {
+			return projects.columns.nodes ?
+				projects.columns.nodes.filter(projectColumn => projectColumn.name === column) :
+				[];
+		});
 
 		const cards = resource.projectCards.nodes ?
 			resource.projectCards.nodes.filter(card => card.project.name === project) : [];
