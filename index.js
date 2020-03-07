@@ -33,14 +33,6 @@ const getData = () => {
 		const fetchColumnQuery = `query {
 			resource( url: "${url}" ) {
 				... on ${eventName === 'issues' ? 'Issue' : 'PullRequest'} {
-					projectCards {
-						nodes {
-							id
-							project {
-								name
-							}
-						}
-					}
 					repository {
 						projects( search: "${project}", first: 10, states: [OPEN] ) {
 							nodes {
@@ -84,23 +76,22 @@ const getData = () => {
 			resource.repository.owner.projects.nodes) ||
 			[];
 
-		// Search the projects with an exactly matching name
-		const projects = [...repoProjects, ...orgProjects].filter(projectNode => projectNode.name === project);
-
-		// Search the projects for columns with a name that matches
-		const columns = projects.flatMap(projects => {
-			return projects.columns.nodes ?
-				projects.columns.nodes.filter(projectColumn => projectColumn.name === column) :
-				[];
-		});
-
-		const cards = resource.projectCards.nodes ?
-			resource.projectCards.nodes.filter(card => card.project.name === project) : [];
-		const cardId = cards.length > 0 ? cards[0].id : null;
+		// Get the column data of projects and columns that match input
+		const columns = [...repoProjects, ...orgProjects]
+			.filter(project => project.name === project)
+			.flatMap(project => project.columns.nodes ?
+				project.columns.nodes.filter(projectColumn => projectColumn.name === column) :
+				[]
+			);
 
 		if (columns.length === 0) {
 			throw new Error(`Could not find ${column} in ${project}`);
 		}
+
+		const cards = resource.projectCards.nodes ?
+			resource.projectCards.nodes.filter(card => card.project.name === project) :
+			[];
+		const cardId = cards.length > 0 ? cards[0].id : null;
 
 		// If a card already exists, move it to the column
 		if (cardId) {
