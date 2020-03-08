@@ -76,6 +76,8 @@ const getData = () => {
 			resource.repository.owner.projects.nodes) ||
 			[];
 
+		console.log([...repoProjects, ...orgProjects]);
+
 		// Get the column data of projects and columns that match input
 		const columns = [...repoProjects, ...orgProjects]
 			.filter(project => project.name === project)
@@ -83,6 +85,8 @@ const getData = () => {
 				project.columns.nodes.filter(projectColumn => projectColumn.name === column) :
 				[]
 			);
+
+		console.log(columns);
 
 		if (columns.length === 0) {
 			throw new Error(`Could not find ${column} in ${project}`);
