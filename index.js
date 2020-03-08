@@ -7,6 +7,8 @@ const column = core.getInput('column');
 
 const octokit = new github.GitHub(token);
 
+console.log('test');
+
 const getData = () => {
 	const {eventName, payload} = github.context;
 	if (eventName !== 'pull_request' && eventName !== 'issues') {
@@ -27,6 +29,7 @@ const getData = () => {
 
 (async () => {
 	try {
+		console.log('hey');
 		const {eventName, action, nodeId, url} = getData();
 
 		// Get the column ID  from searching for the project and card Id if it exists
@@ -67,6 +70,8 @@ const getData = () => {
 			}
 		}`;
 
+		console.log('ho');
+
 		const {resource} = await octokit.graphql(fetchColumnQuery);
 
 		// All the projects found
@@ -86,6 +91,8 @@ const getData = () => {
 				project.columns.nodes.filter(projectColumn => projectColumn.name === column) :
 				[]
 			);
+
+		console.log('lets go');
 
 		const b = JSON.stringify(columns);
 		core.debug(b);
