@@ -7,8 +7,6 @@ const column = core.getInput('column');
 
 const octokit = new github.GitHub(token);
 
-console.log('test');
-
 const getData = () => {
 	const {eventName, payload} = github.context;
 	if (eventName !== 'pull_request' && eventName !== 'issues') {
@@ -29,7 +27,6 @@ const getData = () => {
 
 (async () => {
 	try {
-		console.log('hey');
 		const {eventName, action, nodeId, url} = getData();
 
 		// Get the column ID  from searching for the project and card Id if it exists
@@ -70,8 +67,6 @@ const getData = () => {
 			}
 		}`;
 
-		console.log('ho');
-
 		const {resource} = await octokit.graphql(fetchColumnQuery);
 
 		// All the projects found
@@ -81,21 +76,22 @@ const getData = () => {
 			resource.repository.owner.projects.nodes) ||
 			[];
 
-		const a = JSON.stringify([...repoProjects, ...orgProjects]);
-		core.debug(a);
-
 		// Get the column data of projects and columns that match input
 		const columns = [...repoProjects, ...orgProjects]
-			.filter(project => project.name === project)
+			.filter(project => {
+				console.log(project.name, project);
+				return project.name === project;
+			})
 			.flatMap(project => project.columns.nodes ?
 				project.columns.nodes.filter(projectColumn => projectColumn.name === column) :
 				[]
 			);
 
-		console.log('lets go');
+		core.debug(columns);
 
-		const b = JSON.stringify(columns);
-		core.debug(b);
+		if (columns.length === 0) {
+			throw new Error(`Could not find the column "${column}" in project "${project}"`);
+		}
 
 		const cards = resource.projectCards.nodes ?
 			resource.projectCards.nodes.filter(card => card.project.name === project) :
