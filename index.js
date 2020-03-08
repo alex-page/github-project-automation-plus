@@ -1,12 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const token = core.getInput('repo-token');
-const project = core.getInput('project');
-const column = core.getInput('column');
-
-const octokit = new github.GitHub(token);
-
 const getData = () => {
 	const {eventName, payload} = github.context;
 	if (eventName !== 'pull_request' && eventName !== 'issues') {
@@ -27,6 +21,10 @@ const getData = () => {
 
 (async () => {
 	try {
+		const token = core.getInput('repo-token');
+		const project = core.getInput('project');
+		const column = core.getInput('column');
+
 		const {eventName, action, nodeId, url} = getData();
 
 		// Get the column ID  from searching for the project and card Id if it exists
@@ -45,6 +43,7 @@ const getData = () => {
 						projects( search: "${project}", first: 10, states: [OPEN] ) {
 							nodes {
 								id
+								name
 								columns( first: 100 ) {
 									nodes {
 										id
@@ -58,6 +57,7 @@ const getData = () => {
 								projects( search: "${project}", first: 10, states: [OPEN] ) {
 									nodes {
 										id
+										name
 										columns( first: 100 ) {
 											nodes {
 												id
@@ -73,30 +73,33 @@ const getData = () => {
 			}
 		}`;
 
+		const octokit = new github.GitHub(token);
 		const {resource} = await octokit.graphql(fetchColumnQuery);
 
-		// All the matching projects found
+		// All the projects found
 		const repoProjects = resource.repository.projects.nodes || [];
 		const orgProjects = (resource.repository.owner &&
 			resource.repository.owner.projects &&
 			resource.repository.owner.projects.nodes) ||
 			[];
 
-		// Search the projects for columns with a name that matches
+		// Get the column data of projects and columns that match input
 		const columns = [...repoProjects, ...orgProjects]
-			.flatMap(projects => {
-				return projects.columns.nodes ?
-					projects.columns.nodes.filter(projectColumn => projectColumn.name === column) :
-					[];
-			});
-
-		const cards = resource.projectCards.nodes ?
-			resource.projectCards.nodes.filter(card => card.project.name === project) : [];
-		const cardId = cards.length > 0 ? cards[0].id : null;
+			.filter(foundProject => foundProject.name === project)
+			.flatMap(foundProject => foundProject.columns.nodes ?
+				foundProject.columns.nodes.filter(projectColumn => projectColumn.name === column) :
+				[]
+			);
 
 		if (columns.length === 0) {
-			throw new Error(`Could not find ${column} in ${project}`);
+			throw new Error(`Could not find the column "${column}" in project "${project}"`);
 		}
+
+		// Check if the issue alread has a project associated to it
+		const cards = resource.projectCards.nodes.length === 0 ?
+			resource.projectCards.nodes.filter(card => card.project.name === project) :
+			[];
+		const cardId = cards.length > 0 ? cards[0].id : null;
 
 		// If a card already exists, move it to the column
 		if (cardId) {
@@ -116,7 +119,6 @@ const getData = () => {
 
 		console.log(`✅ ${action === 'opened' ? 'Added' : 'Moved'} card to ${column} in ${project}`);
 	} catch (error) {
-		core.error(error);
 		core.setFailed(error.message);
 	}
 })();
