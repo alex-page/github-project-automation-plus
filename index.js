@@ -97,10 +97,6 @@ const getData = () => {
 		const b = JSON.stringify(columns);
 		core.debug(b);
 
-		if (columns.length === 0) {
-			throw new Error(`Could not find the column "${column}" in project "${project}"`);
-		}
-
 		const cards = resource.projectCards.nodes ?
 			resource.projectCards.nodes.filter(card => card.project.name === project) :
 			[];
