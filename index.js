@@ -76,7 +76,7 @@ const getData = () => {
 			resource.repository.owner.projects.nodes) ||
 			[];
 
-		core.setOutput([...repoProjects, ...orgProjects].toString());
+		core.setOutput('projects', [...repoProjects, ...orgProjects].toString());
 
 		// Get the column data of projects and columns that match input
 		const columns = [...repoProjects, ...orgProjects]
@@ -86,7 +86,7 @@ const getData = () => {
 				[]
 			);
 
-		core.setOutput(columns.toString());
+		core.setOutput('columns', columns.toString());
 
 		if (columns.length === 0) {
 			throw new Error(`Could not find the column "${column}" in project "${project}"`);
