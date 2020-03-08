@@ -78,12 +78,13 @@ const getData = () => {
 
 		// Get the column data of projects and columns that match input
 		const columns = [...repoProjects, ...orgProjects]
-			.filter(project => {
-				console.log(project.name, project);
-				return project.name === project;
+			.filter(foundProject => {
+				console.log('filter proj', foundProject.name);
+				console.log('user input proj', project);
+				return foundProject.name === project;
 			})
-			.flatMap(project => project.columns.nodes ?
-				project.columns.nodes.filter(projectColumn => projectColumn.name === column) :
+			.flatMap(foundProject => foundProject.columns.nodes ?
+				foundProject.columns.nodes.filter(projectColumn => projectColumn.name === column) :
 				[]
 			);
 
