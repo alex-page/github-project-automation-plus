@@ -78,17 +78,11 @@ const getData = () => {
 
 		// Get the column data of projects and columns that match input
 		const columns = [...repoProjects, ...orgProjects]
-			.filter(foundProject => {
-				console.log('filter proj', foundProject.name);
-				console.log('user input proj', project);
-				return foundProject.name === project;
-			})
+			.filter(foundProject => foundProject.name === project)
 			.flatMap(foundProject => foundProject.columns.nodes ?
 				foundProject.columns.nodes.filter(projectColumn => projectColumn.name === column) :
 				[]
 			);
-
-		core.debug(columns);
 
 		if (columns.length === 0) {
 			throw new Error(`Could not find the column "${column}" in project "${project}"`);
