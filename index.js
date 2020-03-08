@@ -96,7 +96,7 @@ const getData = () => {
 		}
 
 		// Check if the issue alread has a project associated to it
-		const cards = resource.projectCards.nodes ?
+		const cards = resource.projectCards.nodes.length === 0 ?
 			resource.projectCards.nodes.filter(card => card.project.name === project) :
 			[];
 		const cardId = cards.length > 0 ? cards[0].id : null;
