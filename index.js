@@ -31,6 +31,14 @@ const getData = () => {
 		const fetchColumnQuery = `query {
 			resource( url: "${url}" ) {
 				... on ${eventName === 'issues' ? 'Issue' : 'PullRequest'} {
+					projectCards {
+						nodes {
+							id
+							project {
+								name
+							}
+						}
+					}
 					repository {
 						projects( search: "${project}", first: 10, states: [OPEN] ) {
 							nodes {
@@ -87,6 +95,7 @@ const getData = () => {
 			throw new Error(`Could not find the column "${column}" in project "${project}"`);
 		}
 
+		// Check if the issue alread has a project associated to it
 		const cards = resource.projectCards.nodes ?
 			resource.projectCards.nodes.filter(card => card.project.name === project) :
 			[];
