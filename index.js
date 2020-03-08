@@ -69,14 +69,14 @@ const getData = () => {
 
 		const {resource} = await octokit.graphql(fetchColumnQuery);
 
-		// All the matching projects found
+		// All the projects found
 		const repoProjects = resource.repository.projects.nodes || [];
 		const orgProjects = (resource.repository.owner &&
 			resource.repository.owner.projects &&
 			resource.repository.owner.projects.nodes) ||
 			[];
 
-		core.setOutput('projects', [...repoProjects, ...orgProjects].toString());
+		core.setOutput('projectz', [...repoProjects, ...orgProjects].toString());
 
 		// Get the column data of projects and columns that match input
 		const columns = [...repoProjects, ...orgProjects]
