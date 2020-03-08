@@ -1,12 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const token = core.getInput('repo-token');
-const project = core.getInput('project');
-const column = core.getInput('column');
-
-const octokit = new github.GitHub(token);
-
 const getData = () => {
 	const {eventName, payload} = github.context;
 	if (eventName !== 'pull_request' && eventName !== 'issues') {
@@ -27,6 +21,10 @@ const getData = () => {
 
 (async () => {
 	try {
+		const token = core.getInput('repo-token');
+		const project = core.getInput('project');
+		const column = core.getInput('column');
+
 		const {eventName, action, nodeId, url} = getData();
 
 		// Get the column ID  from searching for the project and card Id if it exists
@@ -67,6 +65,7 @@ const getData = () => {
 			}
 		}`;
 
+		const octokit = new github.GitHub(token);
 		const {resource} = await octokit.graphql(fetchColumnQuery);
 
 		// All the projects found
