@@ -24,10 +24,11 @@ const getData = () => {
 		const token = core.getInput('repo-token');
 		const project = core.getInput('project');
 		const column = core.getInput('column');
+		const onNewOnly = core.getInput('on-new');
 
 		const {eventName, action, nodeId, url} = getData();
 
-		// Get the column ID  from searching for the project and card Id if it exists
+		// Get the column ID from searching for the project and card Id if it exists
 		const fetchColumnQuery = `query {
 			resource( url: "${url}" ) {
 				... on ${eventName === 'issues' ? 'Issue' : 'PullRequest'} {
@@ -101,7 +102,13 @@ const getData = () => {
 			[];
 		const cardId = cards.length > 0 ? cards[0].id : null;
 
-		// If a card already exists, move it to the column
+		// If a card already exists, and `on-new` is `true` terminate early
+		// as the card column should not be changed
+		if (cardId && onNewOnly === true) {
+			console.log(`🆗 Card already assigned to ${project}. No changes needed.`);
+			return
+		}
+
 		if (cardId) {
 			await Promise.all(
 				columns.map(column => octokit.graphql(`mutation {

@@ -69,6 +69,7 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 | `project` | The name of the project | `Backlog` |
 | `column` | The column to create or move the card to | `Triage` |
 | `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
+| `on-new` | Only run rules if a card does not already exist in the project | `false` |
 
 
 ## Private repositories
