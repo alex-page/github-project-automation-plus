@@ -24,7 +24,9 @@ const generateMutationQuery = require('./generate-mutation-query');
 		// A list of columns that line up with the user entered project and column
 		const mutationQueries = generateMutationQuery(resource, project, column, nodeId);
 
-		// Run the promises
+		console.log(mutationQueries);
+
+		// Run the graphql queries
 		await Promise.all(mutationQueries.map(query => octokit.graphql(query)));
 
 		if (mutationQueries.length > 1) {
