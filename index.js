@@ -103,6 +103,7 @@ const getData = () => {
 
 		// Check if the issue alread has a project associated to it
 		const projectCards = resource.projectCards.nodes.filter(card => card.project.name === project);
+		console.log('hello world');
 		core.debug('Test log here');
 		core.debug(JSON.stringify(projectCards));
 
