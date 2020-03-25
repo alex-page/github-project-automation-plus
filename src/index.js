@@ -1,10 +1,10 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const getActionData = require('./get-action-data');
-const projectQuery = require('./project-query');
-const findColumns = require('./find-columns');
-const generateMutationQueries = require('./generate-mutation-queries');
+// const getActionData = require('./get-action-data');
+// const projectQuery = require('./project-query');
+// const findColumns = require('./find-columns');
+// const generateMutationQueries = require('./generate-mutation-queries');
 
 (async () => {
 	try {
@@ -14,7 +14,7 @@ const generateMutationQueries = require('./generate-mutation-queries');
 
 		// Get data from the current action
 		console.log(JSON.stringify(github.context));
-		const {eventName, action, nodeId, url} = getActionData(github.context);
+		// const {eventName, action, nodeId, url} = getActionData(github.context);
 
 		// // Create a method to query GitHub
 		// const octokit = new github.GitHub(token);
