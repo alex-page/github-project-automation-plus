@@ -1,10 +1,9 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-// const getActionData = require('./get-action-data');
-// const projectQuery = require('./project-query');
-// const findColumns = require('./find-columns');
-// const generateMutationQueries = require('./generate-mutation-queries');
+const getActionData = require('./get-action-data');
+const generateProjectQuery = require('./generate-project-query');
+const generateMutationQuery = require('./generate-mutation-query');
 
 (async () => {
 	try {
@@ -13,30 +12,26 @@ const github = require('@actions/github');
 		const column = core.getInput('column');
 
 		// Get data from the current action
-		console.log(JSON.stringify(github.context));
-		// const {eventName, action, nodeId, url} = getActionData(github.context);
+		const {eventName, nodeId, url} = getActionData(github.context);
 
-		// // Create a method to query GitHub
-		// const octokit = new github.GitHub(token);
+		// Create a method to query GitHub
+		const octokit = new github.GitHub(token);
 
-		// // Get the column ID from searching for the project and card Id if it exists
-		// const {resource} = await octokit.graphql(projectQuery(url, eventName, project));
+		// Get the column ID from searching for the project and card Id if it exists
+		const projectQuery = generateProjectQuery(url, eventName, project);
+		const {resource} = await octokit.graphql(projectQuery);
 
-		// // A list of columns that line up with the user entered project and column
-		// const columns = findColumns(resource);
+		// A list of columns that line up with the user entered project and column
+		const mutationQueries = generateMutationQuery(resource, project, column, nodeId);
 
-		// if (columns.length === 0) {
-		// 	throw new Error(`Could not find the column "${column}" in project "${project}"`);
-		// }
+		// Run the promises
+		await Promise.all(mutationQueries.map(query => octokit.graphql(query)));
 
-		// const mutationQueries = generateMutationQueries(columns, nodeId);
-
-		// console.log(mutationQueries);
-
-		// Check if the issue alread has a project associated to it
-		// const projectCards = resource.projectCards.nodes.filter(card => card.project.name === project);
-
-		console.log(`✅ ${action === 'opened' ? 'Added' : 'Moved'} card to ${column} in ${project}`);
+		if (mutationQueries.length > 1) {
+			console.log(`✅ Card has been added to ${column} in ${mutationQueries.length} projects called ${project}`);
+		} else {
+			console.log(`✅ Card has been added to ${column} in ${project}`);
+		}
 	} catch (error) {
 		core.setFailed(error.message);
 	}

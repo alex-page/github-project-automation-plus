@@ -12,10 +12,10 @@ const projectQuery = (url, eventName, project) => (
 				projectCards {
 					nodes {
 						id
-						project {
-							name
-						}
 						column {
+							id
+						}
+						project {
 							name
 						}
 					}
@@ -23,7 +23,6 @@ const projectQuery = (url, eventName, project) => (
 				repository {
 					projects( search: "${project}", first: 10, states: [OPEN] ) {
 						nodes {
-							id
 							name
 							columns( first: 100 ) {
 								nodes {
@@ -37,7 +36,6 @@ const projectQuery = (url, eventName, project) => (
 						... on ProjectOwner {
 							projects( search: "${project}", first: 10, states: [OPEN] ) {
 								nodes {
-									id
 									name
 									columns( first: 100 ) {
 										nodes {
