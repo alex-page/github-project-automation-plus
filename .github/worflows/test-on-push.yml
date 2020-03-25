@@ -1,0 +1,12 @@
+name: Run workflow test on push
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: |
+          npm i
+          npm run test
