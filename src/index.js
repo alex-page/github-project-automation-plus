@@ -33,9 +33,9 @@ const generateMutationQuery = require('./generate-mutation-query');
 		await Promise.all(mutationQueries.map(query => octokit.graphql(query)));
 
 		if (mutationQueries.length > 1) {
-			console.log(`✅ Card has been added to ${column} in ${mutationQueries.length} projects called ${project}`);
+			console.log(`✅ Card materialised into to ${column} in ${mutationQueries.length} projects called ${project}`);
 		} else {
-			console.log(`✅ Card has been added to ${column} in ${project}`);
+			console.log(`✅ Card materialised into ${column} in ${project}`);
 		}
 	} catch (error) {
 		core.setFailed(error.message);
