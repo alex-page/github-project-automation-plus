@@ -1,6 +1,9 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
+/**
+ * Fetch the relevant data from GitHub
+ */
 const getData = () => {
 	const {eventName, payload} = github.context;
 	if (eventName !== 'pull_request' && eventName !== 'issues') {
@@ -35,6 +38,9 @@ const getData = () => {
 						nodes {
 							id
 							project {
+								name
+							}
+							column {
 								name
 							}
 						}
@@ -84,38 +90,20 @@ const getData = () => {
 			[];
 
 		// Get the column data of projects and columns that match input
-		const columns = [...repoProjects, ...orgProjects]
+		const foundColumns = [...repoProjects, ...orgProjects]
 			.filter(foundProject => foundProject.name === project)
 			.flatMap(foundProject => foundProject.columns.nodes ?
 				foundProject.columns.nodes.filter(projectColumn => projectColumn.name === column) :
 				[]
 			);
 
-		if (columns.length === 0) {
+		if (foundColumns.length === 0) {
 			throw new Error(`Could not find the column "${column}" in project "${project}"`);
 		}
 
 		// Check if the issue alread has a project associated to it
-		const cards = resource.projectCards.nodes.length === 0 ?
-			resource.projectCards.nodes.filter(card => card.project.name === project) :
-			[];
-		const cardId = cards.length > 0 ? cards[0].id : null;
-
-		// If a card already exists, move it to the column
-		if (cardId) {
-			await Promise.all(
-				columns.map(column => octokit.graphql(`mutation {
-					moveProjectCard( input: { cardId: "${cardId}", columnId: "${column.id}"
-				}) { clientMutationId } }`))
-			);
-		// If the card does not exist, add it to the column
-		} else {
-			await Promise.all(
-				columns.map(column => octokit.graphql(`mutation {
-					addProjectCard( input: { contentId: "${nodeId}", projectColumnId: "${column.id}"
-				}) { clientMutationId } }`))
-			);
-		}
+		const projectCards = resource.projectCards.nodes.filter(card => card.project.name === project);
+		console.log(projectCards);
 
 		console.log(`✅ ${action === 'opened' ? 'Added' : 'Moved'} card to ${column} in ${project}`);
 	} catch (error) {
