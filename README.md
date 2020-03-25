@@ -80,10 +80,10 @@ GraphqlError: Resource not accessible by integration
 
 When this happens you will need to:
 1. Create a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
-2. [Create a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) containing the personal access token, call it `GH_PAT`
+2. [Create a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) containing the personal access token, call it `GITHUB_TOKEN`
 3. Change the `repo-token` in the workflow `.yml`  to reference your new token name:
 ```yaml
-repo-token: ${{ secrets.GH_PAT }}
+repo-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 With certain organisations there may be SAML enforcement. This means you will need to `Enable SSO` when you create the personal access token.

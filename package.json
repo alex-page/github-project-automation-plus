@@ -5,9 +5,10 @@
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "watch": "ncc build index.js --watch --minify",
-    "build": "ncc build index.js --minify",
-    "test": "xo"
+    "watch": "ncc build src/index.js --watch --minify",
+    "build": "ncc build src/index.js --minify",
+    "test": "ava && xo",
+    "lint:fix": "xo --fix"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@zeit/ncc": "^0.20.4",
+    "ava": "^3.5.1",
     "husky": "^3.0.5",
     "xo": "^0.27.2"
   },
