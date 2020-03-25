@@ -1,49 +1,48 @@
 {
-  "name": "github-project-automation-plus",
-  "version": "0.1.3",
-  "description": "🤖 Automate GitHub Project cards with any webhook event",
-  "private": true,
-  "main": "dist/index.js",
-  "scripts": {
-    "watch": "ncc build src/index.js --watch --minify",
-    "build": "ncc build src/index.js --minify",
-    "test": "ava && xo",
-    "lint:fix": "xo --fix"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alex-page/automate-project-columns.git"
-  },
-  "keywords": [
-    "github-actions",
-    "github-projects",
-    "issues",
-    "pulls",
-    "automation",
-    "columns"
-  ],
-  "author": "Alex Page <alex@alexpage.com.au>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/alex-page/automate-project-columns/issues"
-  },
-  "homepage": "https://github.com/alex-page/automate-project-columns#readme",
-  "dependencies": {
-    "@actions/core": "^1.2.3",
-    "@actions/github": "^2.1.1"
-  },
-  "devDependencies": {
-    "@zeit/ncc": "^0.20.4",
-    "ava": "^3.5.1",
-    "husky": "^3.0.5",
-    "xo": "^0.27.2"
-  },
-  "files": [
-    "dist/index.js"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run build && git add ./dist/index.js"
-    }
-  }
+	"name": "github-project-automation-plus",
+	"version": "0.2.0",
+	"description": "🤖 Automate GitHub Project cards with any webhook event",
+	"private": true,
+	"main": "dist/index.js",
+	"scripts": {
+		"watch": "ncc build src/index.js --watch --minify",
+		"build": "ncc build src/index.js --minify",
+		"test": "ava && xo"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alex-page/automate-project-columns.git"
+	},
+	"keywords": [
+		"github-actions",
+		"github-projects",
+		"issues",
+		"pulls",
+		"automation",
+		"columns"
+	],
+	"author": "Alex Page <alex@alexpage.com.au>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/alex-page/automate-project-columns/issues"
+	},
+	"homepage": "https://github.com/alex-page/automate-project-columns#readme",
+	"dependencies": {
+		"@actions/core": "^1.2.3",
+		"@actions/github": "^2.1.1"
+	},
+	"devDependencies": {
+		"@zeit/ncc": "^0.20.4",
+		"ava": "^3.5.1",
+		"husky": "^3.0.5",
+		"xo": "^0.27.2"
+	},
+	"files": [
+		"dist/index.js"
+	],
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run build && git add ./dist/index.js"
+		}
+	}
 }
