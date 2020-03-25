@@ -103,7 +103,8 @@ const getData = () => {
 
 		// Check if the issue alread has a project associated to it
 		const projectCards = resource.projectCards.nodes.filter(card => card.project.name === project);
-		console.log(projectCards);
+		core.debug('Test log here');
+		core.debug(JSON.stringify(projectCards));
 
 		console.log(`✅ ${action === 'opened' ? 'Added' : 'Moved'} card to ${column} in ${project}`);
 	} catch (error) {
