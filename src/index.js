@@ -13,25 +13,25 @@ const generateMutationQueries = require('./generate-mutation-queries');
 		const column = core.getInput('column');
 
 		// Get data from the current action
-		console.log(github.context);
+		console.log(JSON.stringify(github.context));
 		const {eventName, action, nodeId, url} = getActionData(github.context);
 
-		// Create a method to query GitHub
-		const octokit = new github.GitHub(token);
+		// // Create a method to query GitHub
+		// const octokit = new github.GitHub(token);
 
-		// Get the column ID from searching for the project and card Id if it exists
-		const {resource} = await octokit.graphql(projectQuery(url, eventName, project));
+		// // Get the column ID from searching for the project and card Id if it exists
+		// const {resource} = await octokit.graphql(projectQuery(url, eventName, project));
 
-		// A list of columns that line up with the user entered project and column
-		const columns = findColumns(resource);
+		// // A list of columns that line up with the user entered project and column
+		// const columns = findColumns(resource);
 
-		if (columns.length === 0) {
-			throw new Error(`Could not find the column "${column}" in project "${project}"`);
-		}
+		// if (columns.length === 0) {
+		// 	throw new Error(`Could not find the column "${column}" in project "${project}"`);
+		// }
 
-		const mutationQueries = generateMutationQueries(columns, nodeId);
+		// const mutationQueries = generateMutationQueries(columns, nodeId);
 
-		console.log(mutationQueries);
+		// console.log(mutationQueries);
 
 		// Check if the issue alread has a project associated to it
 		// const projectCards = resource.projectCards.nodes.filter(card => card.project.name === project);
