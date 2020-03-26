@@ -12,9 +12,6 @@ const projectQuery = (url, eventName, project) => (
 				projectCards {
 					nodes {
 						id
-						column {
-							id
-						}
 						project {
 							name
 							id

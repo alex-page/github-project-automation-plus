@@ -8,9 +8,6 @@ const issueQuery = `query {
 				projectCards {
 					nodes {
 						id
-						column {
-							id
-						}
 						project {
 							name
 							id
@@ -57,9 +54,6 @@ const pullrequestQuery = `query {
 				projectCards {
 					nodes {
 						id
-						column {
-							id
-						}
 						project {
 							name
 							id

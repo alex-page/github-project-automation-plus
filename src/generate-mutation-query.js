@@ -7,7 +7,7 @@
  * @param {string} contentId - The id of the issue or pull request
  */
 const generateMutationQuery = (data, projectName, columnName, contentId) => {
-	// All the projects found
+	// All the projects found in organisation and repositories
 	const repoProjects = data.repository.projects.nodes || [];
 	const orgProjects = (data.repository.owner &&
 		data.repository.owner.projects &&
@@ -29,53 +29,43 @@ const generateMutationQuery = (data, projectName, columnName, contentId) => {
 		throw new Error(`Could not find the column "${columnName}" or project "${projectName}"`);
 	}
 
-	// Get the ids of the end card location
-	const endLocationIds = endLocation.map(project => ({
-		projectId: project.id,
-		columnId: project.columns.nodes
-			.filter(column => column.name === columnName)
-			.map(column => column.id)[0]
-	}));
+	const cardLocations = {};
 
-	// See if the card has a current location
+	// Get the ids of the end card location
+	endLocation.forEach(project => {
+		cardLocations[project.id] = {
+			columnId: project.columns.nodes
+				.filter(column => column.name === columnName)
+				.map(column => column.id)[0]
+		};
+	});
+
+	// See if the card exists in the provided project
 	const currentLocation = data.projectCards.nodes
 		.filter(card => card.project.name === projectName);
 
-	const currentLocationIds = currentLocation.map(card => ({
-		projectId: card.project.id,
-		columnId: card.column.id,
-		cardId: card.id
-	}));
+	currentLocation.forEach(card => {
+		cardLocations[card.project.id].cardId = card.id;
+	});
 
-	// Get cards to create when they do not have a matching existing project
-	const currentCardProjectIds = currentLocationIds.map(ids => ids.projectId);
-	const newCards = endLocationIds.filter(ids => !currentCardProjectIds.includes(ids.projectId));
+	console.log(cardLocations);
 
-	// Create an an array of queries to add the card
-	const addProjectCardQueries = newCards.map(card =>
+	// If the card already exists in the project move it otherwise add a new card
+	const mutations = Object.keys(cardLocations).map(mutation => cardLocations[mutation].cardId ?
+		`mutation {
+			moveProjectCard( input: {
+				cardId: "${cardLocations[mutation].cardId}",
+				columnId: "${cardLocations[mutation].columnId}"
+		}) { clientMutationId } }` :
+
 		`mutation {
 			addProjectCard( input: {
 				contentId: "${contentId}",
-				projectColumnId: "${card.columnId}"
+				projectColumnId: "${cardLocations[mutation].columnId}"
 		}) { clientMutationId } }`
 	);
 
-	// Get cards to move when they exist in a project
-	const endLocationProjectIds = endLocationIds.map(ids => ids.projectId);
-	const moveCards = currentLocationIds.filter(ids => endLocationProjectIds.includes(ids.projectId));
-
-	// Create an array of queries to move the card
-	const moveProjectCardQueries = moveCards.map(card => {
-		const endLocation = endLocationIds.filter(ids => ids.projectId === card.projectId)[0];
-
-		return `mutation {
-			moveProjectCard( input: {
-				cardId: "${card.cardId}",
-				columnId: "${endLocation.columnId}"
-		}) { clientMutationId } }`;
-	});
-
-	return [...addProjectCardQueries, ...moveProjectCardQueries];
+	return mutations;
 };
 
 module.exports = generateMutationQuery;

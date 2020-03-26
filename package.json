@@ -1,13 +1,13 @@
 {
 	"name": "github-project-automation-plus",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"description": "🤖 Automate GitHub Project cards with any webhook event",
 	"private": true,
 	"main": "dist/index.js",
 	"scripts": {
 		"watch": "ncc build src/index.js --watch --minify",
 		"build": "ncc build src/index.js --minify",
-		"test": "ava && xo"
+		"test": "ava --verbose && xo"
 	},
 	"repository": {
 		"type": "git",
