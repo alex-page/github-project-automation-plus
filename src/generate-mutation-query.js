@@ -14,8 +14,8 @@ const generateMutationQuery = (data, projectName, columnName, contentId) => {
 		data.repository.owner.projects.nodes) ||
 		[];
 
-	// Get the data where the project ID and column ID match the user input
-	const foundProjects = [...repoProjects, ...orgProjects]
+	// Find matching projects and columns for the card to move to
+	const endLocation = [...repoProjects, ...orgProjects]
 		.filter(project => project.name === projectName)
 		.flatMap(project => project)
 		.filter(project => {
@@ -24,32 +24,32 @@ const generateMutationQuery = (data, projectName, columnName, contentId) => {
 			return matchingColumns.length !== 0;
 		});
 
-	// Searching for the project and column returned no results
-	if (foundProjects.length === 0) {
+	// There are no locations for the card to move to
+	if (endLocation.length === 0) {
 		throw new Error(`Could not find the column "${columnName}" or project "${projectName}"`);
 	}
 
-	// Get the id's that match the user input
-	const foundIds = foundProjects.map(project => ({
+	// Get the ids of the end card location
+	const endLocationIds = endLocation.map(project => ({
 		projectId: project.id,
 		columnId: project.columns.nodes
 			.filter(column => column.name === columnName)
 			.map(column => column.id)[0]
 	}));
 
-	// Get the current cards for the issue of pull request if they match the user input
-	const currentCards = data.projectCards.nodes
+	// See if the card has a current location
+	const currentLocation = data.projectCards.nodes
 		.filter(card => card.project.name === projectName);
 
-	const currentIds = currentCards.map(card => ({
+	const currentLocationIds = currentLocation.map(card => ({
 		projectId: card.project.id,
 		columnId: card.column.id,
 		cardId: card.id
 	}));
 
-	// Get cards when they do not have a matching existing project
-	const currentCardProjectIds = currentIds.map(ids => ids.projectId);
-	const newCards = foundIds.filter(ids => !currentCardProjectIds.includes(ids.projectId));
+	// Get cards to create when they do not have a matching existing project
+	const currentCardProjectIds = currentLocationIds.map(ids => ids.projectId);
+	const newCards = endLocationIds.filter(ids => !currentCardProjectIds.includes(ids.projectId));
 
 	// Create an an array of queries to add the card
 	const addProjectCardQueries = newCards.map(card =>
@@ -60,18 +60,20 @@ const generateMutationQuery = (data, projectName, columnName, contentId) => {
 		}) { clientMutationId } }`
 	);
 
-	// Get cards when they have a matching project
-	const foundCardProjectIds = foundIds.map(ids => ids.projectId);
-	const moveCards = currentIds.filter(ids => foundCardProjectIds.includes(ids.projectId));
+	// Get cards to move when they exist in a project
+	const endLocationProjectIds = endLocationIds.map(ids => ids.projectId);
+	const moveCards = currentLocationIds.filter(ids => endLocationProjectIds.includes(ids.projectId));
 
 	// Create an array of queries to move the card
-	const moveProjectCardQueries = moveCards.map(card =>
-		`mutation {
+	const moveProjectCardQueries = moveCards.map(card => {
+		const endLocation = endLocationIds.filter(ids => ids.projectId === card.projectId)[0];
+
+		return `mutation {
 			moveProjectCard( input: {
 				cardId: "${card.cardId}",
-				columnId: "${card.columnId}"
-		}) { clientMutationId } }`
-	);
+				columnId: "${endLocation.columnId}"
+		}) { clientMutationId } }`;
+	});
 
 	return [...addProjectCardQueries, ...moveProjectCardQueries];
 };

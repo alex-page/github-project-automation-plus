@@ -12,7 +12,7 @@ const moveData = {
 			{
 				id: 'MDExOlByb2plY3RDYXJkMzUxNzI2MjM=',
 				column: {
-					id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5'
+					id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ6'
 				},
 				project: {
 					name: project,
