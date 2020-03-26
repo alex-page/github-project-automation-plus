@@ -48,8 +48,6 @@ const generateMutationQuery = (data, projectName, columnName, contentId) => {
 		cardLocations[card.project.id].cardId = card.id;
 	});
 
-	console.log(cardLocations);
-
 	// If the card already exists in the project move it otherwise add a new card
 	const mutations = Object.keys(cardLocations).map(mutation => cardLocations[mutation].cardId ?
 		`mutation {

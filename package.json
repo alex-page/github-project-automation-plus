@@ -7,7 +7,7 @@
 	"scripts": {
 		"watch": "ncc build src/index.js --watch --minify",
 		"build": "ncc build src/index.js --minify",
-		"test": "ava --verbose && xo"
+		"test": "ava && xo"
 	},
 	"repository": {
 		"type": "git",
