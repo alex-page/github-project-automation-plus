@@ -172,4 +172,3 @@ test('generateMutationQuery should fail if it cannot find a matching project', t
 
 	t.is(error.message, `Could not find the column "${column}" or project "${project}"`);
 });
-
