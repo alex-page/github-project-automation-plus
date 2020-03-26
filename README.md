@@ -29,7 +29,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.2.1
+      - uses: alex-page/github-project-automation-plus@v0.2.2
         with:
           project: Backlog
           column: Triage
@@ -51,7 +51,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.2.1
+      - uses: alex-page/github-project-automation-plus@v0.2.2
         with:
           project: Backlog
           column: To do
@@ -94,6 +94,7 @@ GraphqlError: Resource protected by organization SAML enforcement. You must gran
 
 ## Release History
 
+- v0.2.2 - Refactor add and move card logic ✨
 - v0.2.1 - Fix bug with move logic when card is already in project
 - v0.2.0 - Restructure project, add tests, change add and move logic
 - v0.1.3 - Exact match for project names
