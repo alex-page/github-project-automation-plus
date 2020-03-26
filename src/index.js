@@ -24,12 +24,12 @@ const generateMutationQuery = require('./generate-mutation-query');
 
 		const {resource} = await octokit.graphql(projectQuery);
 
-		console.debug(JSON.stringify(resource));
+		console.debug(resource);
 
 		// A list of columns that line up with the user entered project and column
 		const mutationQueries = generateMutationQuery(resource, project, column, nodeId);
 
-		console.debug(JSON.stringify(mutationQueries));
+		console.debug(mutationQueries);
 
 		// Run the graphql queries
 		await Promise.all(mutationQueries.map(query => octokit.graphql(query)));
