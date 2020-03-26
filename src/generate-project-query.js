@@ -17,6 +17,7 @@ const projectQuery = (url, eventName, project) => (
 						}
 						project {
 							name
+							id
 						}
 					}
 				}
@@ -24,6 +25,7 @@ const projectQuery = (url, eventName, project) => (
 					projects( search: "${project}", first: 10, states: [OPEN] ) {
 						nodes {
 							name
+							id
 							columns( first: 100 ) {
 								nodes {
 									id
@@ -37,6 +39,7 @@ const projectQuery = (url, eventName, project) => (
 							projects( search: "${project}", first: 10, states: [OPEN] ) {
 								nodes {
 									name
+									id
 									columns( first: 100 ) {
 										nodes {
 											id

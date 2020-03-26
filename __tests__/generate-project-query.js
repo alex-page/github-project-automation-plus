@@ -13,6 +13,7 @@ const issueQuery = `query {
 						}
 						project {
 							name
+							id
 						}
 					}
 				}
@@ -20,6 +21,7 @@ const issueQuery = `query {
 					projects( search: "Backlog", first: 10, states: [OPEN] ) {
 						nodes {
 							name
+							id
 							columns( first: 100 ) {
 								nodes {
 									id
@@ -33,6 +35,7 @@ const issueQuery = `query {
 							projects( search: "Backlog", first: 10, states: [OPEN] ) {
 								nodes {
 									name
+									id
 									columns( first: 100 ) {
 										nodes {
 											id
@@ -59,6 +62,7 @@ const pullrequestQuery = `query {
 						}
 						project {
 							name
+							id
 						}
 					}
 				}
@@ -66,6 +70,7 @@ const pullrequestQuery = `query {
 					projects( search: "Backlogg", first: 10, states: [OPEN] ) {
 						nodes {
 							name
+							id
 							columns( first: 100 ) {
 								nodes {
 									id
@@ -79,6 +84,7 @@ const pullrequestQuery = `query {
 							projects( search: "Backlogg", first: 10, states: [OPEN] ) {
 								nodes {
 									name
+									id
 									columns( first: 100 ) {
 										nodes {
 											id
