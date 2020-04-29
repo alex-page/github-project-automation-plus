@@ -3,7 +3,7 @@ description: '🤖 Automate GitHub Project cards with any webhook event'
 author: 'Alex Page <alex@alexpage.com.au>'
 inputs:
   repo-token:
-    description: 'The GITHUB_TOKEN secret can be passed in using {{ secrets.GITHUB_TOKEN }}'
+    description: 'The GH_TOKEN secret can be passed in using {{ secrets.GH_TOKEN }}'
     required: true
   project:
     description: 'The name of the GitHub Project'

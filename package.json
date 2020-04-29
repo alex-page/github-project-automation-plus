@@ -1,6 +1,6 @@
 {
 	"name": "github-project-automation-plus",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"description": "🤖 Automate GitHub Project cards with any webhook event",
 	"private": true,
 	"main": "dist/index.js",
