@@ -33,7 +33,7 @@ jobs:
         with:
           project: Backlog
           column: Triage
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GH_TOKEN }}
 ```
 
 ### .github/workflows/assigned-pulls-todo.yml
@@ -55,7 +55,7 @@ jobs:
         with:
           project: Backlog
           column: To do
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GH_TOKEN }}
 ```
 
 ## Workflow options
@@ -68,7 +68,7 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 | `types` | The types of activity that will trigger a workflow run. | `opened`, `assigned` |
 | `project` | The name of the project | `Backlog` |
 | `column` | The column to create or move the card to | `Triage` |
-| `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
+| `repo-token` | The personal access token | `${{ secrets.GH_TOKEN }}` |
 
 
 ## Private repositories
@@ -80,10 +80,10 @@ GraphqlError: Resource not accessible by integration
 
 When this happens you will need to:
 1. Create a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
-2. [Create a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) containing the personal access token, call it `GITHUB_TOKEN`
+2. [Create a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) containing the personal access token, call it `GH_TOKEN`
 3. Change the `repo-token` in the workflow `.yml`  to reference your new token name:
 ```yaml
-repo-token: ${{ secrets.GITHUB_TOKEN }}
+repo-token: ${{ secrets.GH_TOKEN }}
 ```
 
 With certain organisations there may be SAML enforcement. This means you will need to `Enable SSO` when you create the personal access token.
@@ -94,6 +94,7 @@ GraphqlError: Resource protected by organization SAML enforcement. You must gran
 
 ## Release History
 
+- v0.2.3 - Replace reserved secret `GITHUB_TOKEN` with `GH_TOKEN` in documentation
 - v0.2.2 - Refactor add and move card logic ✨
 - v0.2.1 - Fix bug with move logic when card is already in project
 - v0.2.0 - Restructure project, add tests, change add and move logic
