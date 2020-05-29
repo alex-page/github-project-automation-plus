@@ -112,6 +112,16 @@ GraphqlError: Resource protected by organization SAML enforcement. You must gran
 Make sure your permissions for your personal access token are correctly configured. Follow the above guide on permissions.
 
 
+## Local development
+
+To set up the action for local development and testing:
+
+1. Create a fork of the github-project-automation-plus
+2. Create a new repository with a project
+3. Add a workflow file that changes the `uses` to your forked repository: `uses: my-fork/github-project-automation-plus@master`
+3. Make changes to your action and deploy them to GitHub
+
+
 ## Release History
 
 - v0.2.3 - Replace reserved secret `GITHUB_TOKEN` with `GITHUB_TOKEN` in documentation
