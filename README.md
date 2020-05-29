@@ -84,10 +84,10 @@ This error happens on forked repositories because [`GITHUB_TOKEN` only has read 
 
 When this happens you will need to:
 1. Create a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). See the below guide on how to configure the permissions.
-2. [Create a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) containing the personal access token, call it `GITHUB_TOKEN`
+2. [Create a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) containing the personal access token, call it `GH_TOKEN`
 3. Change the `repo-token` in the workflow `.yml`  to reference your new token name:
 ```yaml
-repo-token: ${{ secrets.GITHUB_TOKEN }}
+repo-token: ${{ secrets.GH_TOKEN }}
 ```
 
 ### Permissions for personal access tokens
