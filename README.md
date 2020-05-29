@@ -29,7 +29,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.2.3
+      - uses: alex-page/github-project-automation-plus@v0.2.4
         with:
           project: Backlog
           column: Triage
@@ -51,7 +51,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.2.3
+      - uses: alex-page/github-project-automation-plus@v0.2.4
         with:
           project: Backlog
           column: To do
@@ -124,7 +124,8 @@ To set up the action for local development and testing:
 
 ## Release History
 
-- v0.2.3 - Replace reserved secret `GITHUB_TOKEN` with `GITHUB_TOKEN` in documentation
+- v0.2.4 - Update dependencies
+- v0.2.4 - Replace reserved secret `GITHUB_TOKEN` with `GITHUB_TOKEN` in documentation
 - v0.2.2 - Refactor add and move card logic ✨
 - v0.2.1 - Fix bug with move logic when card is already in project
 - v0.2.0 - Restructure project, add tests, change add and move logic
