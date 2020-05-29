@@ -83,7 +83,7 @@ GraphqlError: Resource not accessible by integration
 This error happens on forked repositories because [`GITHUB_TOKEN` only has read permissions](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token). On private repositories you may be lacking admin permissions in the repository or project.
 
 When this happens you will need to:
-1. Create a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). See the below guide on how to [configure the permissions](#Permissions-for-personal-access-tokens).
+1. Create a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). See the below guide on how to [configure the permissions](#permissions-for-personal-access-tokens).
 2. [Create a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) containing the personal access token, call it `GH_TOKEN`
 3. Change the `repo-token` in the workflow `.yml`  to reference your new token name:
 ```yaml
@@ -109,7 +109,7 @@ GraphqlError: Resource protected by organization SAML enforcement. You must gran
 
 **Can't read repository null**
 
-Make sure your permissions for your personal access token are correctly configured. Follow the above [guide on permissions](#Permissions-for-personal-access-tokens).
+Make sure your permissions for your personal access token are correctly configured. Follow the above [guide on permissions](#permissions-for-personal-access-tokens).
 
 
 ## Local development
