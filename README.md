@@ -29,7 +29,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.2.4
+      - uses: alex-page/github-project-automation-plus@v0.3.0
         with:
           project: Backlog
           column: Triage
@@ -51,7 +51,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.2.4
+      - uses: alex-page/github-project-automation-plus@v0.3.0
         with:
           project: Backlog
           column: To do
@@ -126,6 +126,7 @@ To set up the action for local development and testing:
 
 ## Release History
 
+- v0.3.0 - Allow `pull_request_target` event
 - v0.2.4 - Update dependencies
 - v0.2.3 - Replace reserved secret `GITHUB_TOKEN` with `GITHUB_TOKEN` in documentation
 - v0.2.2 - Refactor add and move card logic ✨
