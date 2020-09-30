@@ -82,9 +82,10 @@ GraphqlError: Resource not accessible by integration
 
 **Secrets are not currently available to forks.** This error happens on forked repositories because [`GITHUB_TOKEN` only has read permissions](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token).
 
-On private repositories you may be lacking admin permissions in the repository or project.
+On private repositories you may need to enable policy settings to allow running workflows from forks.
+Please refer to GitHub's documentation to learn about enabling these settings at [enterprise](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-your-enterprise-account/enforcing-github-actions-policies-in-your-enterprise-account#enabling-workflows-for-private-repository-forks), [organization](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/disabling-or-limiting-github-actions-for-your-organization?algolia-query=private+repositor#enabling-workflows-for-private-repository-forks), or [repository](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/disabling-or-limiting-github-actions-for-a-repository#enabling-workflows-for-private-repository-forks) level.
 
-When this happens you will need to:
+Alternatively, you can perform following steps:
 1. Create a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). See the below guide on how to [configure the permissions](#permissions-for-personal-access-tokens).
 2. [Create a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) containing the personal access token, call it `GH_TOKEN`
 3. Change the `repo-token` in the workflow `.yml`  to reference your new token name:
