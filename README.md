@@ -1,4 +1,4 @@
-# GitHub Project Automation+
+# GitHub Project Automation plus
 
 > 🤖 Automate GitHub Project cards with any webhook event
 
