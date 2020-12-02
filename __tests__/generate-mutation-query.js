@@ -50,10 +50,19 @@ const moveData = {
 test('generateMutationQuery move the card when in the correct project and wrong column', t => {
 	t.deepEqual(generateMutationQuery(moveData, project, column, nodeId), [
 		`mutation {
-			moveProjectCard( input: {
-				cardId: "MDExOlByb2plY3RDYXJkMzUxNzI2MjM=",
-				columnId: "MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5"
-		}) { clientMutationId } }`
+				moveProjectCard( input: {
+					cardId: "MDExOlByb2plY3RDYXJkMzUxNzI2MjM=",
+					columnId: "MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5"
+			}) { clientMutationId } }`
+	]);
+});
+
+test('generateMutationQuery delete the card when it is in the project already', t => {
+	t.deepEqual(generateMutationQuery(moveData, project, column, nodeId, true), [
+		`mutation {
+					deleteProjectCard( input: {
+						cardId: "MDExOlByb2plY3RDYXJkMzUxNzI2MjM="
+				}) { clientMutationId } }`
 	]);
 });
 
@@ -93,11 +102,15 @@ const addData = {
 test('generateMutationQuery add the card when the card does not exist in the project', t => {
 	t.deepEqual(generateMutationQuery(addData, project, column, nodeId), [
 		`mutation {
-			addProjectCard( input: {
-				contentId: "MDU6SXNzdWU1ODc4NzU1Mjk=",
-				projectColumnId: "MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5"
-		}) { clientMutationId } }`
+				addProjectCard( input: {
+					contentId: "MDU6SXNzdWU1ODc4NzU1Mjk=",
+					projectColumnId: "MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5"
+			}) { clientMutationId } }`
 	]);
+});
+
+test('generateMutationQuery skip issue deletion when the card does not exist in the project', t => {
+	t.deepEqual(generateMutationQuery(addData, project, column, nodeId, true), []);
 });
 
 const dataNoColumn = {

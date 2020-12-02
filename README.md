@@ -69,6 +69,7 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 | `project` | The name of the project | `Backlog` |
 | `column` | The column to create or move the card to | `Triage` |
 | `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
+| `delete` | If set to true, then the matching carg will deleted from the project | `false` |
 
 ## Personal access token (secrets.GITHUB_TOKEN)
 
