@@ -11,7 +11,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/alex-page/automate-project-columns.git"
+		"url": "git+https://github.com/alex-page/github-project-automation-plus.git"
 	},
 	"keywords": [
 		"github-actions",
@@ -24,9 +24,9 @@
 	"author": "Alex Page <alex@alexpage.com.au>",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/alex-page/automate-project-columns/issues"
+		"url": "https://github.com/alex-page/github-project-automation-plus/issues"
 	},
-	"homepage": "https://github.com/alex-page/automate-project-columns#readme",
+	"homepage": "https://github.com/alex-page/github-project-automation-plus#readme",
 	"dependencies": {
 		"@actions/core": "^1.2.3",
 		"@actions/github": "^2.1.1"
