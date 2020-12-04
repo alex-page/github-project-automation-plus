@@ -64,7 +64,7 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 
 | Setting | Description | Values |
 | --- | --- | --- |
-| `on` | When the automation is ran | `issues` `pull_request` |
+| `on` | When the automation is ran | `issues` `pull_request` `issue_comment` |
 | `types` | The types of activity that will trigger a workflow run. | `opened`, `assigned` |
 | `project` | The name of the project | `Backlog` |
 | `column` | The column to create or move the card to | `Triage` |
