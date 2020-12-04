@@ -48,21 +48,21 @@ const moveData = {
 };
 
 test('generateMutationQuery move the card when in the correct project and wrong column', t => {
-	t.deepEqual(generateMutationQuery(moveData, project, column, nodeId), [
+	t.deepEqual(generateMutationQuery(moveData, project, column, nodeId, 'update'), [
 		`mutation {
-				moveProjectCard( input: {
-					cardId: "MDExOlByb2plY3RDYXJkMzUxNzI2MjM=",
-					columnId: "MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5"
-			}) { clientMutationId } }`
+					moveProjectCard( input: {
+						cardId: "MDExOlByb2plY3RDYXJkMzUxNzI2MjM=",
+						columnId: "MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5"
+				}) { clientMutationId } }`
 	]);
 });
 
 test('generateMutationQuery delete the card when it is in the project already', t => {
-	t.deepEqual(generateMutationQuery(moveData, project, column, nodeId, true), [
+	t.deepEqual(generateMutationQuery(moveData, project, column, nodeId, 'delete'), [
 		`mutation {
-					deleteProjectCard( input: {
-						cardId: "MDExOlByb2plY3RDYXJkMzUxNzI2MjM="
-				}) { clientMutationId } }`
+						deleteProjectCard( input: {
+							cardId: "MDExOlByb2plY3RDYXJkMzUxNzI2MjM="
+					}) { clientMutationId } }`
 	]);
 });
 
@@ -100,17 +100,63 @@ const addData = {
 };
 
 test('generateMutationQuery add the card when the card does not exist in the project', t => {
-	t.deepEqual(generateMutationQuery(addData, project, column, nodeId), [
+	t.deepEqual(generateMutationQuery(addData, project, column, nodeId, 'update'), [
 		`mutation {
-				addProjectCard( input: {
-					contentId: "MDU6SXNzdWU1ODc4NzU1Mjk=",
-					projectColumnId: "MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5"
-			}) { clientMutationId } }`
+					addProjectCard( input: {
+						contentId: "MDU6SXNzdWU1ODc4NzU1Mjk=",
+						projectColumnId: "MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5"
+				}) { clientMutationId } }`
 	]);
 });
 
 test('generateMutationQuery skip issue deletion when the card does not exist in the project', t => {
-	t.deepEqual(generateMutationQuery(addData, project, column, nodeId, true), []);
+	t.deepEqual(generateMutationQuery(addData, project, column, nodeId, 'delete'), []);
+});
+
+const archiveData = {
+	projectCards: {
+		nodes: [
+			{
+				id: 'MDExOlByb2plY3RDYXJkMzUxNzI2MjM=',
+				isArchived: true,
+				project: {
+					name: project,
+					id: 'MDc6UHJvamVjdDQwNzU5MDI='
+				}
+			}
+		]
+	},
+	repository: {
+		projects: {
+			nodes: [
+				{
+					name: project,
+					id: 'MDc6UHJvamVjdDQwNzU5MDI=',
+					columns: {
+						nodes: [
+							{
+								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5',
+								name: column
+							},
+							{
+								id: 'MDEzOlByb2plY3RDb2x1bW44MjUxOTAz',
+								name: 'In progress'
+							}
+						]
+					}
+				}
+			]
+		},
+		owner: {
+			projects: {
+				nodes: []
+			}
+		}
+	}
+};
+
+test('generateMutationQuery skip issue archive when the card is already archived', t => {
+	t.deepEqual(generateMutationQuery(archiveData, project, column, nodeId, 'archive'), []);
 });
 
 const dataNoColumn = {

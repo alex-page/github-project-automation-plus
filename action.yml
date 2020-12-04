@@ -11,10 +11,12 @@ inputs:
   column:
     description: 'The name of the column to move the issue or pull request to'
     required: true
-  delete:
-    description: 'If set to true, then the matching carg will deleted from the project'
+  action:
+    description: |
+      Can be `update`, `delete` or `archive`. This determines the type of the action
+      to be performed on the card
     required: false
-    default: "false"
+    default: "update"
 runs:
   using: 'node12'
   main: 'dist/index.js'

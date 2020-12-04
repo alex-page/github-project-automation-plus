@@ -6,13 +6,11 @@ This action allows you to use any of the [pull_request](https://help.github.com/
 
 If the `pull_request` or `issue` card already exists it will be moved to the column provided. Otherwise the card will be created in the column.
 
-
 ## Usage
 
 Create a [project](https://help.github.com/en/articles/about-project-boards) with columns in your repository, user profile or organisation.
 
 Create a new workflow `.yml` file in the `.github/workflows/` directory. In the `.yml`file you have to decide what webhook events going move or create a card in a column. For more detailed explanation of the workflow file, check out the [GitHub documentation](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file). See the examples below to get started quickly.
-
 
 ### .github/workflows/opened-issues-triage.yml
 
@@ -69,7 +67,7 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 | `project` | The name of the project | `Backlog` |
 | `column` | The column to create or move the card to | `Triage` |
 | `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
-| `delete` | If set to true, then the matching carg will deleted from the project | `false` |
+| `action` | This determines the type of the action to be performed on the card, Default: `update` | `update`, `delete`, `archive` |
 
 ## Personal access token (secrets.GITHUB_TOKEN)
 
@@ -87,9 +85,11 @@ On private repositories you may need to enable policy settings to allow running 
 Please refer to GitHub's documentation to learn about enabling these settings at [enterprise](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-your-enterprise-account/enforcing-github-actions-policies-in-your-enterprise-account#enabling-workflows-for-private-repository-forks), [organization](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/disabling-or-limiting-github-actions-for-your-organization?algolia-query=private+repositor#enabling-workflows-for-private-repository-forks), or [repository](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/disabling-or-limiting-github-actions-for-a-repository#enabling-workflows-for-private-repository-forks) level.
 
 Alternatively, you can perform following steps:
+
 1. Create a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). See the below guide on how to [configure the permissions](#permissions-for-personal-access-tokens).
 2. [Create a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) containing the personal access token, call it `GH_TOKEN`
 3. Change the `repo-token` in the workflow `.yml`  to reference your new token name:
+
 ```yaml
 repo-token: ${{ secrets.GH_TOKEN }}
 ```
@@ -107,6 +107,7 @@ repo-token: ${{ secrets.GH_TOKEN }}
 **SAML enforcement**
 
 With certain organisations there may be SAML enforcement. This means you will need to `Enable SSO` when you create the personal access token.
+
 ```
 GraphqlError: Resource protected by organization SAML enforcement. You must grant your personal token access to this organization
 ```
@@ -114,7 +115,6 @@ GraphqlError: Resource protected by organization SAML enforcement. You must gran
 **Can't read repository null**
 
 Make sure your permissions for your personal access token are correctly configured. Follow the above [guide on permissions](#permissions-for-personal-access-tokens).
-
 
 ## Local development
 
@@ -124,7 +124,6 @@ To set up the action for local development and testing:
 2. Create a new repository with a project
 3. Add a workflow file that changes the `uses` to your forked repository: `uses: my-fork/github-project-automation-plus@master`
 3. Make changes to your action and deploy them to GitHub
-
 
 ## Release History
 

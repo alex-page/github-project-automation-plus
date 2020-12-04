@@ -8,6 +8,7 @@ const issueQuery = `query {
 				projectCards {
 					nodes {
 						id
+						isArchived
 						project {
 							name
 							id
@@ -54,6 +55,7 @@ const pullrequestQuery = `query {
 				projectCards {
 					nodes {
 						id
+						isArchived
 						project {
 							name
 							id
