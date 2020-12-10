@@ -190,5 +190,5 @@ test('getActionData should fail when eventName is not issues or pull_request', t
 
 	const error = t.throws(() => getActionData(failingMockGithubContext));
 
-	t.is(error.message, `Only pull requests or issues allowed, received:\n${eventName}`);
+	t.is(error.message, `Only pull requests, issues or comments allowed, received:\n${eventName}`);
 });
