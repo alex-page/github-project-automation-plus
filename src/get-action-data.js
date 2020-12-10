@@ -5,9 +5,7 @@
  */
 const getActionData = githubContext => {
 	const {eventName, payload} = githubContext;
-	const allowedEvents = ['pull_request', 'pull_request_target', 'issues', 'issue_comment'];
-
-	if (!allowedEvents.includes(eventName)) {
+	if (eventName !== 'pull_request' && eventName !== 'pull_request_target' && eventName !== 'issues' && eventName !== 'issue_comment') {
 		throw new Error(`Only pull requests, issues or comments allowed, received:\n${eventName}`);
 	}
 
