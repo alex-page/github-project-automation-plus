@@ -128,6 +128,7 @@ To set up the action for local development and testing:
 
 ## Release History
 
+- v0.5.0 - Add option to `delete` card
 - v0.4.0 - Add `issue_comment` event
 - v0.3.0 - Add `pull_request_target` event
 - v0.2.4 - Update dependencies
