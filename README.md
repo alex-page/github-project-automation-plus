@@ -127,7 +127,8 @@ To set up the action for local development and testing:
 
 ## Release History
 
-- v0.3.0 - Allow `pull_request_target` event
+- v0.4.0 - Add `issue_comment` event
+- v0.3.0 - Add `pull_request_target` event
 - v0.2.4 - Update dependencies
 - v0.2.3 - Replace reserved secret `GITHUB_TOKEN` with `GITHUB_TOKEN` in documentation
 - v0.2.2 - Refactor add and move card logic ✨
