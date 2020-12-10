@@ -10,6 +10,7 @@ const generateMutationQuery = require('./generate-mutation-query');
 		const token = core.getInput('repo-token');
 		const project = core.getInput('project');
 		const column = core.getInput('column');
+		const action = core.getInput('action') || 'update';
 
 		// Get data from the current action
 		const {eventName, nodeId, url} = getActionData(github.context);
@@ -27,7 +28,11 @@ const generateMutationQuery = require('./generate-mutation-query');
 		core.debug(JSON.stringify(resource));
 
 		// A list of columns that line up with the user entered project and column
-		const mutationQueries = generateMutationQuery(resource, project, column, nodeId);
+		const mutationQueries = generateMutationQuery(resource, project, column, nodeId, action);
+		if ((action === 'delete' || action === 'archive') && mutationQueries.length < 1) {
+			console.log('✅ There is nothing to do with card');
+			return;
+		}
 
 		core.debug(mutationQueries.join('\n'));
 

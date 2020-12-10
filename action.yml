@@ -11,6 +11,12 @@ inputs:
   column:
     description: 'The name of the column to move the issue or pull request to'
     required: true
+  action:
+    description: |
+      Can be `update`, `delete` or `archive`. This determines the type of the action
+      to be performed on the card
+    required: false
+    default: "update"
 runs:
   using: 'node12'
   main: 'dist/index.js'

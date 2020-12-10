@@ -69,6 +69,7 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 | `project` | The name of the project | `Backlog` |
 | `column` | The column to create or move the card to | `Triage` |
 | `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
+| `action` | This determines the type of the action to be performed on the card, Default: `update` | `update`, `delete`, `archive` |
 
 ## Personal access token (secrets.GITHUB_TOKEN)
 
@@ -127,6 +128,7 @@ To set up the action for local development and testing:
 
 ## Release History
 
+- v0.5.0 - Add option to `delete` card
 - v0.4.0 - Add `issue_comment` event
 - v0.3.0 - Add `pull_request_target` event
 - v0.2.4 - Update dependencies

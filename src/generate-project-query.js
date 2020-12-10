@@ -12,6 +12,7 @@ const projectQuery = (url, eventName, project) => (
 				projectCards {
 					nodes {
 						id
+						isArchived
 						project {
 							name
 							id
