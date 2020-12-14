@@ -174,11 +174,33 @@ const mockGithubContext = {
 };
 
 /* eslint-enable camelcase */
-test('getActionData should return a formatted object', t => {
+test('getActionData should return a formatted object from issue', t => {
 	t.deepEqual(getActionData(mockGithubContext), {
 		action: 'opened',
 		eventName: 'issues',
 		nodeId: 'MDU6SXNzdWU1ODc4NzU1Mjk=',
+		url: 'https://github.com/alex-page/test-actions/issues/52'
+	});
+});
+
+test('getActionData should return a formatted object from comment', t => {
+	/* eslint-disable camelcase */
+	const context = {
+		eventName: 'issue_comment',
+		payload: {
+			action: 'created',
+			issue: {
+				node_id: 'MDFooBar45',
+				html_url: 'https://github.com/alex-page/test-actions/issues/52'
+			}
+		}
+	};
+
+	/* eslint-enable camelcase */
+	t.deepEqual(getActionData(context), {
+		action: 'created',
+		eventName: 'issue_comment',
+		nodeId: 'MDFooBar45',
 		url: 'https://github.com/alex-page/test-actions/issues/52'
 	});
 });

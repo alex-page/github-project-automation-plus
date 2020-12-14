@@ -9,7 +9,7 @@ const getActionData = githubContext => {
 		throw new Error(`Only pull requests, issues or comments allowed, received:\n${eventName}`);
 	}
 
-	const githubData = eventName === 'issues' ?
+	const githubData = eventName === 'issues' || eventName === 'issue_comment' ?
 		payload.issue :
 		payload.pull_request;
 
