@@ -3,10 +3,18 @@
  *
  * @param {object} githubContext - The current issue or pull request data
  */
+const ACCEPTED_EVENT_TYPES = [
+	'pull_request',
+	'pull_request_target',
+	'pull_request_review',
+	'issues',
+	'issue_comment'
+];
+
 const getActionData = githubContext => {
 	const {eventName, payload} = githubContext;
-	if (eventName !== 'pull_request' && eventName !== 'pull_request_target' && eventName !== 'issues' && eventName !== 'issue_comment') {
-		throw new Error(`Only pull requests, issues or comments allowed, received:\n${eventName}`);
+	if (!ACCEPTED_EVENT_TYPES.includes(eventName)) {
+		throw new Error(`Only pull requests, reviews, issues, or comments allowed. Received:\n${eventName}`);
 	}
 
 	const githubData = eventName === 'issues' || eventName === 'issue_comment' ?

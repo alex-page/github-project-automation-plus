@@ -205,12 +205,12 @@ test('getActionData should return a formatted object from comment', t => {
 	});
 });
 
-test('getActionData should fail when eventName is not issues or pull_request', t => {
+test('getActionData should fail when eventName is not covered by action', t => {
 	const failingMockGithubContext = Object.assign({}, mockGithubContext);
 	const eventName = 'label';
 	failingMockGithubContext.eventName = eventName;
 
 	const error = t.throws(() => getActionData(failingMockGithubContext));
 
-	t.is(error.message, `Only pull requests, issues or comments allowed, received:\n${eventName}`);
+	t.is(error.message, `Only pull requests, reviews, issues, or comments allowed. Received:\n${eventName}`);
 });
