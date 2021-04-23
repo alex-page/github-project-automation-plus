@@ -64,8 +64,8 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 
 | Setting | Description | Values |
 | --- | --- | --- |
-| `on` | When the automation is ran | `issues` `pull_request` `issue_comment` |
-| `types` | The types of activity that will trigger a workflow run. | `opened`, `assigned`, `edited` |
+| `on` | When the automation is ran | `issues` `pull_request` `issue_comment` `pull_request_target` `pull_request_review` |
+| `types` | The types of activity that will trigger a workflow run. | `opened`, `assigned`, `edited`: [See GitHub docs](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request) for more |
 | `project` | The name of the project | `Backlog` |
 | `column` | The column to create or move the card to | `Triage` |
 | `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
