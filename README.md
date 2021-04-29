@@ -111,6 +111,7 @@ You may need to enable policy settings to allow running workflows from forks. Pl
 
 ## Release History
 
+- v0.7.1 - Move Node.js version back to v12
 - v0.7.0 - Update documentation and dependencies
 - v0.6.0 - Add support for `pull_request_target` and `pull_request_review` 
 - v0.5.1 - Fix get event data from issue_coment
