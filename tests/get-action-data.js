@@ -64,7 +64,7 @@ const mockGithubContext = {
 			contents_url: 'https://api.github.com/repos/alex-page/test-actions/contents/{+path}',
 			contributors_url: 'https://api.github.com/repos/alex-page/test-actions/contributors',
 			created_at: '2020-03-08T00:03:14Z',
-			default_branch: 'master',
+			default_branch: 'main',
 			deployments_url: 'https://api.github.com/repos/alex-page/test-actions/deployments',
 			description: 'Repo to test actions',
 			disabled: false,
@@ -167,7 +167,7 @@ const mockGithubContext = {
 	},
 	eventName: 'issues',
 	sha: '526d81e24203000f49d90eb530707b141ae64c89',
-	ref: 'refs/heads/master',
+	ref: 'refs/heads/main',
 	workflow: 'Move new issues into "Triage"',
 	action: 'alex-pagegithub-project-automation-plus',
 	actor: 'alex-page'
