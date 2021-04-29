@@ -62,7 +62,7 @@ jobs:
 
 Change these options in the workflow `.yml` file to meet your GitHub project needs.
 
-| Setting | Description | Values |
+| Inputs | Description | Values |
 | --- | --- | --- |
 | `on` | When the automation is ran | `issues` `pull_request` `issue_comment` `pull_request_target` `pull_request_review` |
 | `types` | The types of activity that will trigger a workflow run. | `opened`, `assigned`, `edited`: [See GitHub docs](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request) for more |
@@ -71,38 +71,28 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 | `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
 | `action` | This determines the type of the action to be performed on the card, Default: `update` | `update`, `delete`, `archive` |
 
-## Personal access token (secrets.GITHUB_TOKEN)
+## Personal access token
 
-Depending on your project set up you may be able to use [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) which requires no set up. This is only possible when the project and repository are owned by your account.
+Most of the time [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) will work as your `repo-token`. This requires no set up.
 
-For forked and private repositories this error occurs:
+If you are using a private repository, detatched project or an organisation project you will need a personal access token to send events from your issues and pull requests.
 
-```shell
-GraphqlError: Resource not accessible by integration
-```
+1. Create a personal access token
+    1. [Public repository and public project board](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token)
+    1. [Private repository and private project board](https://github.com/settings/tokens/new?scopes=repo&description=GHPROJECT_TOKEN)
+    1. [Organisation project board and repository](https://github.com/settings/tokens/new?scopes=repo,write:org&description=GHPROJECT_TOKEN)
 
-**Secrets are not currently available to forks.** This error happens on forked repositories because [`GITHUB_TOKEN` only has read permissions](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token).
-
-On private repositories you may need to enable policy settings to allow running workflows from forks.
-Please refer to GitHub's documentation to learn about enabling these settings at [enterprise](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-your-enterprise-account/enforcing-github-actions-policies-in-your-enterprise-account#enabling-workflows-for-private-repository-forks), [organization](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/disabling-or-limiting-github-actions-for-your-organization?algolia-query=private+repositor#enabling-workflows-for-private-repository-forks), or [repository](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/disabling-or-limiting-github-actions-for-a-repository#enabling-workflows-for-private-repository-forks) level.
-
-Alternatively, you can perform following steps:
-1. Create a [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). See the below guide on how to [configure the permissions](#permissions-for-personal-access-tokens).
-2. [Create a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) containing the personal access token, call it `GH_TOKEN`
-3. Change the `repo-token` in the workflow `.yml`  to reference your new token name:
+1. [Add a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) `GHPROJECT_TOKEN` with the personal access token.
+1. Update the `repo-token` in the workflow `.yml`  to reference your new token name:
 ```yaml
-repo-token: ${{ secrets.GH_TOKEN }}
+repo-token: ${{ secrets.GHPROJECT_TOKEN }}
 ```
-
-### Permissions for personal access tokens
-
-| Repo and project board | Permission |
-| --- | --- |
-| Public repository and project board | [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) |
-| Private repository and project board | `Full control of private repositories` |
-| Organisation public or private project board and repository | `Read and write org and team membership, read and write org projects` |
 
 ## Troubleshooting
+
+**GraphqlError: Resource not accessible by integration**
+
+**Secrets are not currently available to forks.** This error happens on forked repositories because [`GITHUB_TOKEN` only has read permissions](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token).
 
 **SAML enforcement**
 
@@ -115,19 +105,15 @@ GraphqlError: Resource protected by organization SAML enforcement. You must gran
 
 Make sure your permissions for your personal access token are correctly configured. Follow the above [guide on permissions](#permissions-for-personal-access-tokens).
 
+**Private repositories**
 
-## Local development
-
-To set up the action for local development and testing:
-
-1. Create a fork of the github-project-automation-plus
-2. Create a new repository with a project
-3. Add a workflow file that changes the `uses` to your forked repository: `uses: my-fork/github-project-automation-plus@main`
-3. Make changes to your action and deploy them to GitHub
+On private repositories you may need to enable policy settings to allow running workflows from forks.
+Please refer to GitHub's documentation to learn about enabling these settings at [enterprise](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-your-enterprise-account/enforcing-github-actions-policies-in-your-enterprise-account#enabling-workflows-for-private-repository-forks), [organization](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/disabling-or-limiting-github-actions-for-your-organization?algolia-query=private+repositor#enabling-workflows-for-private-repository-forks), or [repository](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/disabling-or-limiting-github-actions-for-a-repository#enabling-workflows-for-private-repository-forks) level.
 
 
 ## Release History
 
+- v0.7.0 - Update documentation and dependencies
 - v0.6.0 - Add support for `pull_request_target` and `pull_request_review` 
 - v0.5.1 - Fix get event data from issue_coment
 - v0.5.0 - Add option to `delete` card
