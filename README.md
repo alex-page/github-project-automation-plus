@@ -73,12 +73,11 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 
 ## Personal access token
 
-Most of the time [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) will work as your `repo-token`. This requires no set up.
+Most of the time [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) will work as your `repo-token`. This requires no set up. If you have a public project board and public repository this is the option for you.
 
-If you are using a private repository, detatched project or an organisation project you will need a personal access token to send events from your issues and pull requests.
+If you are using a private repository or are using an organisation project you will need a personal access token to send events from your issues and pull requests.
 
 1. Create a personal access token
-    1. [Public repository and public project board](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token)
     1. [Private repository and private project board](https://github.com/settings/tokens/new?scopes=repo&description=GHPROJECT_TOKEN)
     1. [Organisation project board and repository](https://github.com/settings/tokens/new?scopes=repo,write:org&description=GHPROJECT_TOKEN)
 
@@ -90,9 +89,7 @@ repo-token: ${{ secrets.GHPROJECT_TOKEN }}
 
 ## Troubleshooting
 
-**GraphqlError: Resource not accessible by integration**
-
-**Secrets are not currently available to forks.** This error happens on forked repositories because [`GITHUB_TOKEN` only has read permissions](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token).
+**GraphqlError: Resource not accessible by integration** and **Secrets are not currently available to forks.** This error happens on forked repositories because [`GITHUB_TOKEN` only has read permissions](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token).
 
 **SAML enforcement**
 
@@ -107,8 +104,7 @@ Make sure your permissions for your personal access token are correctly configur
 
 **Private repositories**
 
-On private repositories you may need to enable policy settings to allow running workflows from forks.
-Please refer to GitHub's documentation to learn about enabling these settings at [enterprise](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-your-enterprise-account/enforcing-github-actions-policies-in-your-enterprise-account#enabling-workflows-for-private-repository-forks), [organization](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/disabling-or-limiting-github-actions-for-your-organization?algolia-query=private+repositor#enabling-workflows-for-private-repository-forks), or [repository](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/disabling-or-limiting-github-actions-for-a-repository#enabling-workflows-for-private-repository-forks) level.
+You may need to enable policy settings to allow running workflows from forks. Please refer to GitHub's documentation to learn about enabling these settings at [enterprise](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-your-enterprise-account/enforcing-github-actions-policies-in-your-enterprise-account#enabling-workflows-for-private-repository-forks), [organization](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/disabling-or-limiting-github-actions-for-your-organization?algolia-query=private+repositor#enabling-workflows-for-private-repository-forks), or [repository](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/disabling-or-limiting-github-actions-for-a-repository#enabling-workflows-for-private-repository-forks) level.
 
 
 ## Release History
