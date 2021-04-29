@@ -24,7 +24,7 @@ const generateMutationQuery = (data, projectName, columnName, contentId, action)
 		.filter(project => {
 			const matchingColumns = project.columns.nodes
 				.filter(column => column.name === columnName);
-			return matchingColumns.length !== 0;
+			return matchingColumns.length > 0;
 		});
 
 	// There are no locations for the card to move to
@@ -35,22 +35,22 @@ const generateMutationQuery = (data, projectName, columnName, contentId, action)
 	const cardLocations = {};
 
 	// Get the ids of the end card location
-	endLocation.forEach(project => {
+	for (const project of endLocation) {
 		cardLocations[project.id] = {
 			columnId: project.columns.nodes
 				.filter(column => column.name === columnName)
 				.map(column => column.id)[0]
 		};
-	});
+	}
 
 	// See if the card exists in the provided project
 	const currentLocation = data.projectCards.nodes
 		.filter(card => card.project.name === projectName);
 
-	currentLocation.forEach(card => {
+	for (const card of currentLocation) {
 		cardLocations[card.project.id].cardId = card.id;
 		cardLocations[card.project.id].isArchived = card.isArchived;
-	});
+	}
 
 	// If the card already exists in the project move it otherwise add a new card
 	const mutations = Object.keys(cardLocations).map(mutation => {
