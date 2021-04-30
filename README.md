@@ -29,7 +29,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.6.0
+      - uses: alex-page/github-project-automation-plus@v0.7.1
         with:
           project: Backlog
           column: Triage
@@ -51,7 +51,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.6.0
+      - uses: alex-page/github-project-automation-plus@v0.7.1
         with:
           project: Backlog
           column: To do
