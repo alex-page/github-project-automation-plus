@@ -83,7 +83,7 @@ You will need a personal access token to send events from your issues and pull r
     1. [Private repository or private project](https://github.com/settings/tokens/new?scopes=repo&description=GHPROJECT_TOKEN)
     1. [Organisation project board or organisation repository](https://github.com/settings/tokens/new?scopes=repo,write:org&description=GHPROJECT_TOKEN)
 
-1. [Add a secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) `GHPROJECT_TOKEN` with the personal access token.
+1. [Add a secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) `GHPROJECT_TOKEN` with the personal access token.
 1. Update the `repo-token` in the workflow `.yml`  to reference your new token name:
 ```yaml
 repo-token: ${{ secrets.GHPROJECT_TOKEN }}
