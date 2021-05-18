@@ -12,8 +12,6 @@ const generateMutationQuery = require('./generate-mutation-query');
 		const column = core.getInput('column');
 		const action = core.getInput('action') || 'update';
 		const assignee = core.getInput('assignee');
-		
-		console.log(JSON.stringify(github.context.payload));
 
 		// Get data from the current action
 		const {eventName, nodeId, url, eventAssignees} = getActionData(github.context);
@@ -59,7 +57,7 @@ const generateMutationQuery = require('./generate-mutation-query');
 			}
 		}
 		else {
-			console.log ("Event assignee did not match action specified event assignee")
+			console.log ("Event assignee did not match workflow specified event assignee")
 		}
 	} catch (error) {
 		core.setFailed(error.message);
