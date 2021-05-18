@@ -70,6 +70,7 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 | `column` | The column to create or move the card to | `Triage` |
 | `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
 | `action` | This determines the type of the action to be performed on the card, Default: `update` | `update`, `delete`, `archive` |
+| `assignee` | This will only cause the workflow to execute on issues/PRs where the assignee matches the specified workflow input assignee. Be sure to configure your `on` workflow kickoff to `types:[assigned]`. Default: None | `GitHub Username`
 
 ## Personal access token
 

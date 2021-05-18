@@ -8,7 +8,26 @@ const mockGithubContext = {
 		action: 'opened',
 		issue: {
 			assignee: null,
-			assignees: [],
+			assignees: [{
+				avatar_url: 'https://avatars1.githubusercontent.com/u/19199063?v=4',
+				events_url: 'https://api.github.com/users/alex-page/events{/privacy}',
+				followers_url: 'https://api.github.com/users/alex-page/followers',
+				following_url: 'https://api.github.com/users/alex-page/following{/other_user}',
+				gists_url: 'https://api.github.com/users/alex-page/gists{/gist_id}',
+				gravatar_id: '',
+				html_url: 'https://github.com/alex-page',
+				id: 19199063,
+				login: 'alex-page',
+				node_id: 'MDQ6VXNlcjE5MTk5MDYz',
+				organizations_url: 'https://api.github.com/users/alex-page/orgs',
+				received_events_url: 'https://api.github.com/users/alex-page/received_events',
+				repos_url: 'https://api.github.com/users/alex-page/repos',
+				site_admin: false,
+				starred_url: 'https://api.github.com/users/alex-page/starred{/owner}{/repo}',
+				subscriptions_url: 'https://api.github.com/users/alex-page/subscriptions',
+				type: 'User',
+				url: 'https://api.github.com/users/alex-page'
+			}],
 			author_association: 'OWNER',
 			body: '',
 			closed_at: null,
@@ -179,7 +198,27 @@ test('getActionData should return a formatted object from issue', t => {
 		action: 'opened',
 		eventName: 'issues',
 		nodeId: 'MDU6SXNzdWU1ODc4NzU1Mjk=',
-		url: 'https://github.com/alex-page/test-actions/issues/52'
+		url: 'https://github.com/alex-page/test-actions/issues/52',
+		eventAssignees: [{
+			avatar_url: 'https://avatars1.githubusercontent.com/u/19199063?v=4',
+			events_url: 'https://api.github.com/users/alex-page/events{/privacy}',
+			followers_url: 'https://api.github.com/users/alex-page/followers',
+			following_url: 'https://api.github.com/users/alex-page/following{/other_user}',
+			gists_url: 'https://api.github.com/users/alex-page/gists{/gist_id}',
+			gravatar_id: '',
+			html_url: 'https://github.com/alex-page',
+			id: 19199063,
+			login: 'alex-page',
+			node_id: 'MDQ6VXNlcjE5MTk5MDYz',
+			organizations_url: 'https://api.github.com/users/alex-page/orgs',
+			received_events_url: 'https://api.github.com/users/alex-page/received_events',
+			repos_url: 'https://api.github.com/users/alex-page/repos',
+			site_admin: false,
+			starred_url: 'https://api.github.com/users/alex-page/starred{/owner}{/repo}',
+			subscriptions_url: 'https://api.github.com/users/alex-page/subscriptions',
+			type: 'User',
+			url: 'https://api.github.com/users/alex-page'
+		}]
 	});
 });
 
@@ -191,7 +230,27 @@ test('getActionData should return a formatted object from comment', t => {
 			action: 'created',
 			issue: {
 				node_id: 'MDFooBar45',
-				html_url: 'https://github.com/alex-page/test-actions/issues/52'
+				html_url: 'https://github.com/alex-page/test-actions/issues/52',
+				assignees: [{
+					avatar_url: 'https://avatars1.githubusercontent.com/u/19199063?v=4',
+					events_url: 'https://api.github.com/users/alex-page/events{/privacy}',
+					followers_url: 'https://api.github.com/users/alex-page/followers',
+					following_url: 'https://api.github.com/users/alex-page/following{/other_user}',
+					gists_url: 'https://api.github.com/users/alex-page/gists{/gist_id}',
+					gravatar_id: '',
+					html_url: 'https://github.com/alex-page',
+					id: 19199063,
+					login: 'alex-page',
+					node_id: 'MDQ6VXNlcjE5MTk5MDYz',
+					organizations_url: 'https://api.github.com/users/alex-page/orgs',
+					received_events_url: 'https://api.github.com/users/alex-page/received_events',
+					repos_url: 'https://api.github.com/users/alex-page/repos',
+					site_admin: false,
+					starred_url: 'https://api.github.com/users/alex-page/starred{/owner}{/repo}',
+					subscriptions_url: 'https://api.github.com/users/alex-page/subscriptions',
+					type: 'User',
+					url: 'https://api.github.com/users/alex-page'
+				}]
 			}
 		}
 	};
@@ -201,7 +260,27 @@ test('getActionData should return a formatted object from comment', t => {
 		action: 'created',
 		eventName: 'issue_comment',
 		nodeId: 'MDFooBar45',
-		url: 'https://github.com/alex-page/test-actions/issues/52'
+		url: 'https://github.com/alex-page/test-actions/issues/52',
+		eventAssignees: [{
+			avatar_url: 'https://avatars1.githubusercontent.com/u/19199063?v=4',
+			events_url: 'https://api.github.com/users/alex-page/events{/privacy}',
+			followers_url: 'https://api.github.com/users/alex-page/followers',
+			following_url: 'https://api.github.com/users/alex-page/following{/other_user}',
+			gists_url: 'https://api.github.com/users/alex-page/gists{/gist_id}',
+			gravatar_id: '',
+			html_url: 'https://github.com/alex-page',
+			id: 19199063,
+			login: 'alex-page',
+			node_id: 'MDQ6VXNlcjE5MTk5MDYz',
+			organizations_url: 'https://api.github.com/users/alex-page/orgs',
+			received_events_url: 'https://api.github.com/users/alex-page/received_events',
+			repos_url: 'https://api.github.com/users/alex-page/repos',
+			site_admin: false,
+			starred_url: 'https://api.github.com/users/alex-page/starred{/owner}{/repo}',
+			subscriptions_url: 'https://api.github.com/users/alex-page/subscriptions',
+			type: 'User',
+			url: 'https://api.github.com/users/alex-page'
+		}]
 	});
 });
 
