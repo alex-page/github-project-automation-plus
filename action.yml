@@ -17,6 +17,9 @@ inputs:
       to be performed on the card
     required: false
     default: "update"
+  assignee:
+    description: '(OPTIONAL) Only process cards for specified issue/PR assignee. Assignee = GitHub username'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

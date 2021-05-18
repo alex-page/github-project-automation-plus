@@ -21,11 +21,14 @@ const getActionData = githubContext => {
 		payload.issue :
 		payload.pull_request;
 
+	console.log(JSON.stringify(githubData));
+
 	return {
 		eventName,
 		action: payload.action,
 		nodeId: githubData.node_id,
-		url: githubData.html_url
+		url: githubData.html_url,
+		eventAssignee: githubData.assignee.login
 	};
 };
 
