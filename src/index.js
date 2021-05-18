@@ -13,6 +13,8 @@ const generateMutationQuery = require('./generate-mutation-query');
 		const action = core.getInput('action') || 'update';
 		const assignee = core.getInput('assignee');
 		
+		console.log(JSON.stringify(github.context.payload));
+
 		// Get data from the current action
 		const {eventName, nodeId, url, eventAssignee} = getActionData(github.context);
 
