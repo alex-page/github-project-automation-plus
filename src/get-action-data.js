@@ -26,7 +26,7 @@ const getActionData = githubContext => {
 		action: payload.action,
 		nodeId: githubData.node_id,
 		url: githubData.html_url,
-		eventAssignee: githubData.assignee.login
+		eventAssignees: githubData.assignees
 	};
 };
 

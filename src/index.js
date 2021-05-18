@@ -16,9 +16,17 @@ const generateMutationQuery = require('./generate-mutation-query');
 		console.log(JSON.stringify(github.context.payload));
 
 		// Get data from the current action
-		const {eventName, nodeId, url, eventAssignee} = getActionData(github.context);
+		const {eventName, nodeId, url, eventAssignees} = getActionData(github.context);
 
-		if (!assignee || assignee === eventAssignee) {
+		let matchingAssignee = false;
+		for (const eventAssignee of eventAssignees) {
+			if (assignee === eventAssignee.login) {
+				matchingAssignee = true;
+				break;
+			}
+		}
+
+		if (!assignee || matchingAssignee) {
 
 			// Create a method to query GitHub
 			const octokit = new github.GitHub(token);
