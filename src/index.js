@@ -44,15 +44,11 @@ const generateMutationQuery = require('./generate-mutation-query');
 			// Run the graphql queries
 			await Promise.all(mutationQueries.map(query => octokit.graphql(query)));
 
-			console.log("test log");
-			console.log(JSON.stringify(github.context));
-			console.log(JSON.stringify(github.context.payload));
-
-			// if (mutationQueries.length > 1) {
-			// 	console.log(`✅ Card materialised into to ${column} in ${mutationQueries.length} projects called ${project}`);
-			// } else {
-			// 	console.log(`✅ Card materialised into ${column} in ${project}`);
-			// }
+			if (mutationQueries.length > 1) {
+				console.log(`✅ Card materialised into to ${column} in ${mutationQueries.length} projects called ${project}`);
+			} else {
+				console.log(`✅ Card materialised into ${column} in ${project}`);
+			}
 		}
 		else {
 			console.log ("Event assignee did not match action specified event assignee")

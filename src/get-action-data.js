@@ -21,8 +21,6 @@ const getActionData = githubContext => {
 		payload.issue :
 		payload.pull_request;
 
-	console.log(JSON.stringify(githubData));
-
 	return {
 		eventName,
 		action: payload.action,
