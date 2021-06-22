@@ -102,7 +102,7 @@ GraphqlError: Resource protected by organization SAML enforcement. You must gran
 
 **Can't read repository null**
 
-Make sure your permissions for your personal access token are correctly configured. Follow the above [guide on permissions](#permissions-for-personal-access-tokens).
+Make sure your permissions for your personal access token are correctly configured. Follow the above [guide on permissions](#personal-access-token).
 
 **Private repositories**
 
