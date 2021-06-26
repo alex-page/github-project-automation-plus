@@ -66,6 +66,10 @@ test('generateMutationQuery delete the card when it is in the project already', 
 	]);
 });
 
+test('generateMutationQuery skip issue addition when the card already exists in the project', t => {
+	t.deepEqual(generateMutationQuery(moveData, project, column, nodeId, 'add'), []);
+});
+
 const addData = {
 	projectCards: {
 		nodes: []

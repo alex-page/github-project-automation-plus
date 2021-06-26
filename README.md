@@ -69,7 +69,7 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 | `project` | The name of the project | `Backlog` |
 | `column` | The column to create or move the card to | `Triage` |
 | `repo-token` | The personal access token | `${{ secrets.GITHUB_TOKEN }}` |
-| `action` | This determines the type of the action to be performed on the card, Default: `update` | `update`, `delete`, `archive` |
+| `action` | This determines the type of the action to be performed on the card, Default: `update` | `update`, `delete`, `archive`, `add` |
 
 ## Personal access token
 
