@@ -75,11 +75,12 @@ Change these options in the workflow `.yml` file to meet your GitHub project nee
 
 Most of the time [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) will work as your `repo-token`. This requires no set up. If you have a public project board and public repository this is the option for you.
 
-**Private repository or organisation projects**
+**Repository project, private repository or organisation projects**
 
 You will need a personal access token to send events from your issues and pull requests.
 
 1. Create a personal access token
+    1. [Public repository and repository project](https://github.com/settings/tokens/new?scopes=repo&description=GHPROJECT_TOKEN)
     1. [Private repository or private project](https://github.com/settings/tokens/new?scopes=repo&description=GHPROJECT_TOKEN)
     1. [Organisation project board or organisation repository](https://github.com/settings/tokens/new?scopes=repo,write:org&description=GHPROJECT_TOKEN)
 
@@ -91,7 +92,7 @@ repo-token: ${{ secrets.GHPROJECT_TOKEN }}
 
 ## Troubleshooting
 
-**GraphqlError: Resource not accessible by integration** and **Secrets are not currently available to forks.** This error happens on forked repositories because [`GITHUB_TOKEN` only has read permissions](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token).
+**GraphqlError: Resource not accessible by integration** or **Secrets are not currently available to forks.** This error happens on repository projects and forked repositories because [`GITHUB_TOKEN` only has read permissions](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token). Create a personal access token following the instructions above.
 
 **SAML enforcement**
 
