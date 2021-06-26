@@ -88,6 +88,15 @@ const generateMutationQuery = (data, projectName, columnName, contentId, action)
 					}) { clientMutationId } }`;
 		}
 
+		if (action === 'add' && !cardLocations[mutation].cardId) {
+			// Add issue if the card does not exist in the project
+			return `mutation {
+					addProjectCard( input: {
+						contentId: "${contentId}",
+						projectColumnId: "${cardLocations[mutation].columnId}"
+				}) { clientMutationId } }`;
+		}
+
 		return undefined;
 	});
 

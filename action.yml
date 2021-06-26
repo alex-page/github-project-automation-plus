@@ -13,7 +13,7 @@ inputs:
     required: true
   action:
     description: |
-      Can be `update`, `delete` or `archive`. This determines the type of the action
+      Can be `update`, `delete` or `archive` or `add`. This determines the type of the action
       to be performed on the card
     required: false
     default: "update"
