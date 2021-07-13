@@ -6,7 +6,7 @@
  * @param {string} project - The project to find
  */
 const projectQuery = (url, eventName, project) =>
-  `query {
+	`query {
 		resource( url: "${url}" ) {
 			... on ${eventName.startsWith('issue') ? 'Issue' : 'PullRequest'} {
 				projectCards {
