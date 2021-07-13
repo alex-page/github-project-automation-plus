@@ -5,10 +5,10 @@
  * @param {string} eventName - The current event name
  * @param {string} project - The project to find
  */
-const projectQuery = (url, eventName, project) => (
-	`query {
+const projectQuery = (url, eventName, project) =>
+  `query {
 		resource( url: "${url}" ) {
-			... on ${eventName === 'issues' ? 'Issue' : 'PullRequest'} {
+			... on ${eventName.startsWith('issue') ? 'Issue' : 'PullRequest'} {
 				projectCards {
 					nodes {
 						id
@@ -51,7 +51,6 @@ const projectQuery = (url, eventName, project) => (
 				}
 			}
 		}
-	}`
-);
+	}`;
 
 module.exports = projectQuery;
