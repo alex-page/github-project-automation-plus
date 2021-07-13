@@ -29,7 +29,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.8.0
+      - uses: alex-page/github-project-automation-plus@v0.8.1
         with:
           project: Backlog
           column: Triage
@@ -51,7 +51,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.8.0
+      - uses: alex-page/github-project-automation-plus@v0.8.1
         with:
           project: Backlog
           column: To do
@@ -112,11 +112,12 @@ You may need to enable policy settings to allow running workflows from forks. Pl
 
 ## Release History
 
+- v0.8.1 - Fix `issue_coment` error with automation
 - v0.8.0 - Add new action type `add`
 - v0.7.1 - Move Node.js version back to v12
 - v0.7.0 - Update documentation and dependencies
 - v0.6.0 - Add support for `pull_request_target` and `pull_request_review` 
-- v0.5.1 - Fix get event data from issue_coment
+- v0.5.1 - Fix get event data from `issue_coment`
 - v0.5.0 - Add option to `delete` card
 - v0.4.0 - Add `issue_comment` event
 - v0.3.0 - Add `pull_request_target` event
