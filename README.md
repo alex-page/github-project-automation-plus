@@ -92,7 +92,13 @@ repo-token: ${{ secrets.GHPROJECT_TOKEN }}
 
 ## Troubleshooting
 
-**GraphqlError: Resource not accessible by integration** or **Secrets are not currently available to forks.** This error happens on repository projects and forked repositories because [`GITHUB_TOKEN` only has read permissions](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token). Create a personal access token following the instructions above.
+**GraphqlError: Resource not accessible by integration** or **Secrets are not currently available to forks.**
+
+This error happens on repository projects and forked repositories because [`GITHUB_TOKEN` only has read permissions](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token). Create a personal access token following the instructions above.
+
+**Parameter token or opts.auth is required**
+
+This error happens when using a personal access token to run the workflow on PRs from forked repositories. This is because [GitHub secrets are not populated for workflows triggered by forks](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-events-for-forked-repositories-2). Use `pull_request_target` as the webhook event instead to [enable access to secrets](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request_target).
 
 **SAML enforcement**
 
