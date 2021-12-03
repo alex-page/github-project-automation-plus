@@ -2,13 +2,13 @@
  * GraphQl query to get project and column information
  *
  * @param {string} url - Issue or Pull request url
- * @param {string} is_pr - Whether the event is a Pull Request (false if it's an Issue)
+ * @param {string} payload - The event payload
  * @param {string} project - The project to find
  */
-const projectQuery = (url, is_pr, project) =>
+const projectQuery = (url, payload, project) =>
 	`query {
 		resource( url: "${url}" ) {
-			... on ${!is_pr ? 'Issue' : 'PullRequest'} {
+			... on ${!payload.pull_request && !payload.issue.pull_request ? 'Issue' : 'PullRequest'} {
 				projectCards {
 					nodes {
 						id
