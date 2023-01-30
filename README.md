@@ -29,7 +29,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.8.1
+      - uses: alex-page/github-project-automation-plus@v0.8.3
         with:
           project: Backlog
           column: Triage
@@ -51,7 +51,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.8.1
+      - uses: alex-page/github-project-automation-plus@v0.8.3
         with:
           project: Backlog
           column: To do
@@ -118,6 +118,8 @@ You may need to enable policy settings to allow running workflows from forks. Pl
 
 ## Release History
 
+- v0.8.3 - Update documentation so users get latest version
+- v0.8.2 - Update NodeJS support to use latest version
 - v0.8.1 - Fix `issue_coment` error with automation
 - v0.8.0 - Add new action type `add`
 - v0.7.1 - Move Node.js version back to v12
