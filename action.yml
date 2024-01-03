@@ -18,7 +18,7 @@ inputs:
     required: false
     default: "update"
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
 branding:
   icon: 'cpu'
