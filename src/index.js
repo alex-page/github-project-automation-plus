@@ -13,13 +13,13 @@ const generateMutationQuery = require('./generate-mutation-query');
 		const action = core.getInput('action') || 'update';
 
 		// Get data from the current action
-		const {eventName, nodeId, url} = getActionData(github.context);
+		const {nodeId, url} = getActionData(github.context);
 
 		// Create a method to query GitHub
 		const octokit = new github.GitHub(token);
 
 		// Get the column ID from searching for the project and card Id if it exists
-		const projectQuery = generateProjectQuery(url, eventName, project);
+		const projectQuery = generateProjectQuery(url, github.context.payload, project);
 
 		core.debug(projectQuery);
 

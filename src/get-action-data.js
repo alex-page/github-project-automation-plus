@@ -17,13 +17,9 @@ const getActionData = githubContext => {
 		throw new Error(`Only pull requests, reviews, issues, or comments allowed. Received:\n${eventName}`);
 	}
 
-	const githubData = eventName === 'issues' || eventName === 'issue_comment' ?
-		payload.issue :
-		payload.pull_request;
+	const githubData = payload.issue || payload.pull_request
 
 	return {
-		eventName,
-		action: payload.action,
 		nodeId: githubData.node_id,
 		url: githubData.html_url
 	};
