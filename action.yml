@@ -11,6 +11,16 @@ inputs:
   column:
     description: 'The name of the column to move the issue or pull request to'
     required: true
+  column-allow-list:
+    type: string
+    description: 'Columns which cards are allowed to be moved from. If not specified, all columns are allowed. Multiple columns separated by newline or comma.'
+    required: false
+    default: ''
+  column-deny-list:
+    type: string
+    description: 'Columns which cards are not allowed to be moved from. If not specified, no columns are denied. Multiple columns separated by newline or comma.'
+    required: false
+    default: ''
   action:
     description: |
       Can be `update`, `delete` or `archive` or `add`. This determines the type of the action

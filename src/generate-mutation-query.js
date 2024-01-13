@@ -5,11 +5,13 @@
  * @param {string} projectName - The user inputted project name
  * @param {string} columnName - The user inputted column name
  * @param {string} contentId - The id of the issue or pull request
+ * @param {list} columnAllowList - List of columns allowed to move from. If unset, any.
+ * @param {list} columnDenyList - List of columns to deny movement from. If unset, none.
  * @param {"delete"|"archive"|"update"} action - the action to be performed on the card
  */
 // if this is important, we will need to refactor the function
 // eslint-disable-next-line max-params
-const generateMutationQuery = (data, projectName, columnName, contentId, action) => {
+const generateMutationQuery = (data, projectName, columnName, contentId, columnAllowList, columnDenyList, action) => {
 	// All the projects found in organisation and repositories
 	const repoProjects = data.repository.projects.nodes || [];
 	const orgProjects = (data.repository.owner &&
@@ -50,10 +52,23 @@ const generateMutationQuery = (data, projectName, columnName, contentId, action)
 	for (const card of currentLocation) {
 		cardLocations[card.project.id].cardId = card.id;
 		cardLocations[card.project.id].isArchived = card.isArchived;
+        cardLocations[card.project.id].curColumnName = (card.column && card.column.name) ? card.column.name : undefined;
 	}
 
 	// If the card already exists in the project move it otherwise add a new card
 	const mutations = Object.keys(cardLocations).map(mutation => {
+        // If the column allow list is specified, and this card's current
+        // column is not in it, skip.
+        if (cardLocations[mutation].curColumnName  && columnAllowList && columnAllowList.length && !columnAllowList.includes(cardLocations[mutation].curColumnName)) {
+            return undefined;
+        }
+
+        // If the column deny list is specified, and this card's current column
+        // is in it, skip.
+        if (cardLocations[mutation].curColumnName && columnDenyList && columnDenyList.length && columnDenyList.includes(cardLocations[mutation].curColumnName)) {
+            return undefined;
+        }
+
 		if (action === 'update') {
 			// Othervise keep default procedure
 			return cardLocations[mutation].cardId ?
